@@ -4,8 +4,7 @@ The spread of infectious diseases is a very real problem even in the modern age.
 
 ```sh
 # Assuming meteor is already installed
-$ git clone https://github.com/matteodem/meteor-boilerplate.git
-$ cd meteor-boilerplate
+$ git clone https://github.com/nsakapeter/CMPT440-P1.git
 $ meteor npm install
 $ meteor npm start
 ```
