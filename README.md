@@ -1,6 +1,6 @@
-# [![meteor-boilerplate](https://github.com/matteodem/media-images/blob/master/boilerplate/meteor_boilerplate_header.jpg?raw=true)](http://meteor-boilerplate.surge.sh/)
+# [![meteor-boilerplate]()](http://meteor-boilerplate.surge.sh/)
 
-This boilerplate is here to give you a simple starting point for your [meteor](https://www.meteor.com) projects.
+The spread of infectious diseases is a very real problem even in the modern age. There are many aspects to consider for how diseases actually spread and are eventually killed off or die out. This project is going to use a computer model to simulate the spread of infectious diseases.
 
 ```sh
 # Assuming meteor is already installed
