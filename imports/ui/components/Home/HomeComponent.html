@@ -1,39 +1,104 @@
 <template name="Home">
-  {{#ContentContainer containerClasses="bg-bluetoviolet black-50" }}
-    <h1 class="f-headline-l f1 pv2 mv0 font-poppins mw5">meteor boilerplate</h1>
-    <div class="f2-l f3 mt2 font-roboto-slab">A boilerplate for meteor projects</div>
+      <!--[if lte IE 9]>
+          <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+      <![endif]-->
 
-    <div class="f1">
-      <i class="ion-arrow-down-a icon"></i>
-    </div>
-  {{/ContentContainer}}
+      <!-- MAIN CONTENT -->
+      <main class="">
+          <header class="c-navbar d-flex">
 
-  {{#ContentContainer containerClasses="bg-washed-blue dark-gray" }}
-    <div class="font-roboto-slab f2-l f3 lh-copy">
-      Built for {{#Link href="https://www.meteor.com/"}}meteor{{/Link}}, conforms to the {{#Link href="https://standardjs.com/"}}standard guide{{/Link}}
-      and applies functional styling with {{#Link href="http://tachyons.io/"}}tachyons{{/Link}}. Uses {{#Link href="http://blazejs.org/"}}blaze{{/Link}} by default, but
-      can be easily changed to {{#Link href="https://www.meteor.com/tutorials"}}whatever you like{{/Link}}.
-    </div>
-  {{/ContentContainer}}
 
-  {{#ContentContainer containerClasses="bg-washed-green" }}
-    <div class="tc">
-      {{#Button href="https://github.com/matteodem/meteor-boilerplate#meteor-boilerplate"}}
-        Check it out
-      {{/Button}}
-    </div>
-  {{/ContentContainer}}
+              <h2 class="c-navbar__title u-mr-auto">Select all that apply</h2>
 
-  {{#ContentContainer containerClasses="bg-washed-blue mid-gray" }}
-    <div class="font-roboto-slab f2-l f3 lh-copy">
-      Not convinced?
-      Check out {{#Link href="https://github.com/matteodem/meteor-boilerplate/blob/master/GUIDE.md#why-this-stack"}}why{{/Link}} this stack makes sense.
-    </div>
-  {{/ContentContainer}}
+              <form class="u-mb-medium d-flex ">
+                <div class="c-choice c-choice--radio u-mr-small">
+                    <input class="c-choice__input" id="radio1" name="radios" type="radio">
+                    <label class="c-choice__label" for="radio1">SIR Model</label>
+                </div>
 
-  <div class="ph4 pv3 bg-dark-gray near-white">
-    <div class="font-roboto-slab f4 lh-copy">
-      made by <a class="near-white hover-light-silver no-underline" href="http://matteodem.ch/">matteodem</a>
-    </div>
-  </div>
+                <div class="c-choice c-choice--radio u-mr-small">
+                    <input class="c-choice__input" id="radio2" name="radios" type="radio">
+                    <label class="c-choice__label" for="radio2">Herd Immunity</label>
+                </div>
+
+                <div class="c-choice c-choice--radio u-mr-small">
+                    <input class="c-choice__input" id="radio3" name="radios" type="radio">
+                    <label class="c-choice__label" for="radio3">Dynamic Population</label>
+                </div>
+            </form>
+          </header><!-- // .c-navbar -->
+          <div class="c-toolbar u-mb-medium">
+            <h3 class="c-toolbar__title has-divider"></h3>
+            <div class="c-switch is-active u-mr-medium">
+                            <input class="c-switch__input" id="switch2" type="checkbox" checked="checked">
+                            <label class="c-switch__label" for="switch2">Use Universal Parameter</label>
+                        </div>
+
+                        <div class="c-field c-field--inline u-mr-small">
+                            <input class="c-input" type="text" placeholder="Search">
+                        </div>
+                        <div class="c-field c-field--inline u-mr-small">
+                            <input class="c-input" type="text" placeholder="Search">
+                        </div>
+                        <div class="c-field c-field--inline u-mr-small">
+                            <input class="c-input" type="text" placeholder="Search">
+                        </div>
+        </div>
+          <div class="container">
+              <div class="row">
+                  <div class="col-xl-8">
+                      <div class="c-card u-p-medium u-mb-medium">
+                          <div class="u-flex u-justify-between u-align-items-center">
+                              <h3 class="c-card__title">Simulation</h3>
+                              <span class="u-text-small u-text-uppercase u-text-mute"> SIR Model</span>
+                          </div>
+
+                          <canvas id="js-chart-revenue" width="300" height="178"></canvas>
+                      </div>
+                  </div>
+
+                  <div class="col-xl-4">
+                    <div class="c-card u-mb-xsmall">
+                      <!-- <header class="c-card__header u-pt-large">
+                          <h1 class="u-h3 u-text-center u-mb-zero">Input disease parameters</h1>
+                      </header> -->
+
+                      <form class="c-card__body">
+                          <div class="c-field u-mb-small">
+                              <label class="c-field__label" for="input1">Beta</label>
+                              <input class="c-input" type="text" id="input1" placeholder="clark@dashboard.com">
+                          </div>
+
+                          <div class="c-field u-mb-small">
+                              <label class="c-field__label" for="input2">Gamma</label>
+                              <input class="c-input" type="text" id="input2" placeholder="Numbers, Letters...">
+                          </div>
+
+                          <div class="c-field u-mb-small">
+                              <label class="c-field__label" for="input3">Susceptible Population</label>
+                              <input class="c-input" type="text" id="input3" placeholder="Susceptible Population">
+                          </div>
+
+                          <div class="c-field u-mb-small">
+                              <label class="c-field__label" for="input3">Infected Population</label>
+                              <input class="c-input" type="text" id="input3" placeholder="Infected Population">
+                          </div>
+
+                          <div class="c-field u-mb-small">
+                              <label class="c-field__label" for="input3">Recovered Population</label>
+                              <input class="c-input" type="text" id="input3" placeholder="Recovered Population">
+                          </div>
+
+                          <div class="c-field u-mb-small">
+                              <label class="c-field__label" for="input3">Days</label>
+                              <input class="c-input" type="text" id="input3" placeholder="Days">
+                          </div>
+
+                          <button class="c-btn c-btn--info c-btn--fullwidth" type="submit">Submit</button>
+                      </form>
+                  </div>
+                  </div>
+              </div><!-- // .row -->
+          </div><!-- // .container -->
+      </main>
 </template>
