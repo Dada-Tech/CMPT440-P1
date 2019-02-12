@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 
 import '../imports/config/SecurityConfig.js'
+// import '../imports/ui/main.js'
 import loadUsers from '../imports/loaders/UsersLoader.js'
 //import loadFixtures from '../imports/loaders/FixturesLoader.js'
 

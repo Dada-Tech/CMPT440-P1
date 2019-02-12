@@ -5,100 +5,200 @@
 
       <!-- MAIN CONTENT -->
       <main class="">
-          <header class="c-navbar d-flex">
+          <header class="c-navbar d-flex align-items-center">
 
 
               <h2 class="c-navbar__title u-mr-auto">Select all that apply</h2>
 
-              <form class="u-mb-medium d-flex ">
-                <div class="c-choice c-choice--radio u-mr-small">
+              <form class=" d-flex align-items-center">
+                <div class="c-choice c-choice--radio u-mr-small u-mb-zero">
                     <input class="c-choice__input" id="radio1" name="radios" type="radio">
                     <label class="c-choice__label" for="radio1">SIR Model</label>
                 </div>
 
-                <div class="c-choice c-choice--radio u-mr-small">
+                <div class="c-choice c-choice--radio u-mr-small u-mb-zero">
                     <input class="c-choice__input" id="radio2" name="radios" type="radio">
                     <label class="c-choice__label" for="radio2">Herd Immunity</label>
                 </div>
 
-                <div class="c-choice c-choice--radio u-mr-small">
+                <div class="c-choice c-choice--radio u-mr-small u-mb-zero">
                     <input class="c-choice__input" id="radio3" name="radios" type="radio">
                     <label class="c-choice__label" for="radio3">Dynamic Population</label>
                 </div>
+
+                <div class="c-switch u-mr-small">
+                                <input class="c-switch__input" id="switch1" type="checkbox" checked="">
+                                <label class="c-switch__label" for="switch1">Use Universal Parameter</label>
+                            </div>
+
+                            <div class="c-switch u-mr-small simulateMultipleLabel">
+                                            <input class="c-switch__input simulateMultipleCheckbox" id="switch2" type="checkbox">
+                                            <label class="c-switch__label " for="switch2">Simulate Multiple Scenarios</label>
+                                        </div>
             </form>
           </header><!-- // .c-navbar -->
           <div class="c-toolbar u-mb-medium">
             <h3 class="c-toolbar__title has-divider"></h3>
-            <div class="c-switch is-active u-mr-medium">
-                            <input class="c-switch__input" id="switch2" type="checkbox" checked="checked">
-                            <label class="c-switch__label" for="switch2">Use Universal Parameter</label>
+
+
+                        <div class="c-field c-field--inline u-mr-small">
+                            <label class="c-field__label" for="input2">Susceptible Population</label>
+                            <input class="c-input" type="text" placeholder="Susceptible Population">
+                        </div>
+                        <div class="c-field c-field--inline u-mr-small">
+                            <label class="c-field__label" for="input2">Infected Population</label>
+                            <input class="c-input" type="text" placeholder="Infected Population">
+                        </div>
+                        <div class="c-field c-field--inline u-mr-small">
+                            <label class="c-field__label" for="input2">Recovered Population</label>
+                            <input class="c-input" type="text" placeholder="Recovered Population">
                         </div>
 
                         <div class="c-field c-field--inline u-mr-small">
-                            <input class="c-input" type="text" placeholder="Search">
+                            <label class="c-field__label" for="input2">Days</label>
+                            <input class="c-input" type="text" placeholder="Days ">
                         </div>
                         <div class="c-field c-field--inline u-mr-small">
-                            <input class="c-input" type="text" placeholder="Search">
+                            <label class="c-field__label" for="input2">Birth Rate</label>
+                            <input class="c-input" type="text" placeholder="Birth Rate ">
                         </div>
                         <div class="c-field c-field--inline u-mr-small">
-                            <input class="c-input" type="text" placeholder="Search">
+                            <label class="c-field__label" for="input2">Death Rate</label>
+                            <input class="c-input" type="text" placeholder="Death Rate ">
                         </div>
         </div>
+
+          {{#if simulateMultiple}}
           <div class="container">
-              <div class="row">
-                  <div class="col-xl-8">
-                      <div class="c-card u-p-medium u-mb-medium">
-                          <div class="u-flex u-justify-between u-align-items-center">
-                              <h3 class="c-card__title">Simulation</h3>
-                              <span class="u-text-small u-text-uppercase u-text-mute"> SIR Model</span>
-                          </div>
+            <div class="row">
+            <div class="col-xl-12">
+              <div class="c-table-responsive@desktop">
+                      <table class="c-table c-table--highlight u-mb-small">
 
-                          <canvas id="js-chart-revenue" width="300" height="178"></canvas>
-                      </div>
+                          <caption class="c-table__title">
+                              Multiple Disease Simulation <small>Please enter all parameters necessary in the table below</small>
+
+                              <button class="c-btn c-btn--info float-right" type="submit">Simulate Diseases</button>
+                          </caption>
+
+                          <thead class="c-table__head c-table__head--slim">
+                              <tr class="c-table__row">
+                                <th class="c-table__cell c-table__cell--head">Beta</th>
+                                <th class="c-table__cell c-table__cell--head">Gamma</th>
+                                <th class="c-table__cell c-table__cell--head">Infected Pop.</th>
+                                <th class="c-table__cell c-table__cell--head">Recovered Pop.</th>
+                                <th class="c-table__cell c-table__cell--head">Susceptible Pop.</th>
+                                <th class="c-table__cell c-table__cell--head">Death Rate</th>
+                                <th class="c-table__cell c-table__cell--head">Birth Rate</th>
+                                <th class="c-table__cell c-table__cell--head">
+                                    <span class="u-hidden-visually">Actions</span>
+                                </th>
+                              </tr>
+                          </thead>
+
+                          <tbody>
+                              <tr class="c-table__row c-table__row--danger">
+                                  <td class="c-table__cell">
+                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
+                                  </td>
+
+                                  <td class="c-table__cell">
+                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
+                                  </td>
+                                  <td class="c-table__cell">
+                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
+                                  </td>
+                                  <td class="c-table__cell">
+                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
+                                  </td>
+                                  <td class="c-table__cell">
+                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
+                                  </td>
+                                  <td class="c-table__cell">
+                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
+                                  </td>
+                                  <td class="c-table__cell">
+                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
+                                  </td>
+                                  <td class="c-table__cell">
+                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
+                                  </td>
+
+                              </tr>
+
+
+
+
+
+
+
+
+                          </tbody>
+                      </table>
                   </div>
+              </div>
+              </div>
+            </div>
+          {{else}}
 
-                  <div class="col-xl-4">
-                    <div class="c-card u-mb-xsmall">
-                      <!-- <header class="c-card__header u-pt-large">
-                          <h1 class="u-h3 u-text-center u-mb-zero">Input disease parameters</h1>
-                      </header> -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8">
+                        <div class="c-card u-p-medium u-mb-medium">
+                            <div class="u-flex u-justify-between u-align-items-center">
+                                <h3 class="c-card__title">Simulation</h3>
+                                <span class="u-text-small u-text-uppercase u-text-mute"> SIR Model</span>
+                            </div>
 
-                      <form class="c-card__body">
-                          <div class="c-field u-mb-small">
-                              <label class="c-field__label" for="input1">Beta</label>
-                              <input class="c-input" type="text" id="input1" placeholder="clark@dashboard.com">
-                          </div>
+                            <canvas id="js-chart-revenue" width="300" height="178"></canvas>
+                        </div>
+                    </div>
 
-                          <div class="c-field u-mb-small">
-                              <label class="c-field__label" for="input2">Gamma</label>
-                              <input class="c-input" type="text" id="input2" placeholder="Numbers, Letters...">
-                          </div>
+                    <div class="col-xl-4">
+                      <div class="c-card u-mb-xsmall">
+                        <!-- <header class="c-card__header u-pt-large">
+                            <h1 class="u-h3 u-text-center u-mb-zero">Input disease parameters</h1>
+                        </header> -->
 
-                          <div class="c-field u-mb-small">
-                              <label class="c-field__label" for="input3">Susceptible Population</label>
-                              <input class="c-input" type="text" id="input3" placeholder="Susceptible Population">
-                          </div>
+                        <form class="c-card__body">
+                            <div class="c-field u-mb-small">
+                                <label class="c-field__label" for="input1">Beta</label>
+                                <input class="c-input" type="text" id="input1" placeholder="0.0">
+                            </div>
 
-                          <div class="c-field u-mb-small">
-                              <label class="c-field__label" for="input3">Infected Population</label>
-                              <input class="c-input" type="text" id="input3" placeholder="Infected Population">
-                          </div>
+                            <div class="c-field u-mb-small">
+                                <label class="c-field__label" for="input2">Gamma</label>
+                                <input class="c-input" type="text" id="input2" placeholder="0.0">
+                            </div>
 
-                          <div class="c-field u-mb-small">
-                              <label class="c-field__label" for="input3">Recovered Population</label>
-                              <input class="c-input" type="text" id="input3" placeholder="Recovered Population">
-                          </div>
+                            <div class="c-field u-mb-small">
+                                <label class="c-field__label" for="input3">Susceptible Population</label>
+                                <input class="c-input" type="text" id="input3" placeholder="1000">
+                            </div>
 
-                          <div class="c-field u-mb-small">
-                              <label class="c-field__label" for="input3">Days</label>
-                              <input class="c-input" type="text" id="input3" placeholder="Days">
-                          </div>
+                            <div class="c-field u-mb-small">
+                                <label class="c-field__label" for="input3">Infected Population</label>
+                                <input class="c-input" type="text" id="input3" placeholder="200">
+                            </div>
 
-                          <button class="c-btn c-btn--info c-btn--fullwidth" type="submit">Submit</button>
-                      </form>
-                  </div>
-                  </div>
-              </div><!-- // .row -->
-          </div><!-- // .container -->
+                            <div class="c-field u-mb-small">
+                                <label class="c-field__label" for="input3">Recovered Population</label>
+                                <input class="c-input" type="text" id="input3" placeholder="800">
+                            </div>
+
+                            <div class="c-field u-mb-small">
+                                <label class="c-field__label" for="input3">Days</label>
+                                <input class="c-input" type="text" id="input3" placeholder="Days">
+                            </div>
+
+                            <button class="c-btn c-btn--info c-btn--fullwidth" type="submit">Submit</button>
+                        </form>
+                    </div>
+                    </div>
+                </div><!-- // .row -->
+            </div><!-- // .container -->
+          {{/if}}
+
+
       </main>
 </template>

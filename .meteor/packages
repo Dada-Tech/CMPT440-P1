@@ -23,7 +23,10 @@ check@1.2.5
 dynamic-import@0.2.0
 shell-server@0.3.0
 standard-minifier-js@2.2.0
-
+reactive-dict@1.2.0
+reactive-var@1.0.11
+mrt:reactive-store
+mrt:external-file-loader
 # Community Packages
 
 ostrio:flow-router-extra
