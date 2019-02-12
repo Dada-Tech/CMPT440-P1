@@ -17,18 +17,19 @@ Template.Home.helpers({
 });
 
 Template.Home.events({
-  'click .simulateMultipleLabel': function(e, instance) {
+  // 'click .simulateMultipleLabel': function(e, instance) {
+    'click .simulateMultipleLabel'(event, instance) {
     alert("hi");
-    var event_instance = instance;
-    var el = $('.simulateMultipleCheckbox');
-    if (el.is(':checked') == true){
-      event_instance.simulateMultiple.set(false);
-      alert("hi");
-    }
-    else{
-      event_instance.simulateMultiple.set(true);
-        alert("hey");
-    }
+    // var event_instance = instance;
+    // var el = $('.simulateMultipleCheckbox');
+    // if (el.is(':checked') == true){
+    //   event_instance.simulateMultiple.set(false);
+    //   alert("hi");
+    // }
+    // else{
+    //   event_instance.simulateMultiple.set(true);
+    //     alert("hey");
+    // }
 
 
   },
@@ -37,7 +38,7 @@ Template.Home.events({
 Template.Home.onCreated(function() {
   var instance;
   instance = this;
-  instance.simulateMultiple = new ReactiveVar(false);
+  instance.simulateMultiple = new ReactiveVar(true);
 });
 
 Template.Home.onRendered(function() {
