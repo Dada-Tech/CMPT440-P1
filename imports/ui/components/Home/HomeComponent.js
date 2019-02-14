@@ -25,39 +25,36 @@ Template.Home.helpers({
 });
 
 Template.Home.events({
-  // 'click .simulateMultipleLabel': function(e, instance) {
-    'click .simulateMultipleLabel'(event, instance) {
+    'click .simulateMultiple'(event, instance) {
       // event.preventDefault();
       // event.stopPropagation();
-        alert("hi");
 
-    var event_instance = instance;
-    var el = $('.simulateMultipleCheckbox');
-    if (el.is(':checked') == true){
-      event_instance.simulateMultiple.set(false);
-      alert("hi");
-    }
-    else{
-      event_instance.simulateMultiple.set(true);
-        alert("hey");
-    }
+      var event_instance = instance;
+      var el = $('.simulateMultipleCheckbox');
+      if (el.is(':checked') == true){
+        event_instance.simulateMultiple.set(true);
+      }
+      else{
+        event_instance.simulateMultiple.set(false);
+      }
+
+
+
 
 
   },
-  'click .universalParametersLabel'(event, instance) {
+  'click .universalParametersSwitch'(event, instance) {
     // event.preventDefault();
     // event.stopPropagation();
-      alert("hi");
+
 
   var event_instance = instance;
-  var el = $('.unversalParametersCheckbox');
+  var el = $('.universalParametersCheckbox');
   if (el.is(':checked') == true){
-    event_instance.universalParameters.set(false);
-    alert("hi");
+    event_instance.universalParameters.set(true);
   }
   else{
-    event_instance.universalParameters.set(true);
-      alert("hey");
+    event_instance.universalParameters.set(false);
   }
 
 
@@ -77,8 +74,8 @@ Template.Home.events({
 Template.Home.onCreated(function() {
   var instance;
   instance = this;
-  instance.simulateMultiple = new ReactiveVar(true);
-  instance.universalParameters = new ReactiveVar(true);
+  instance.simulateMultiple = new ReactiveVar(false);
+  instance.universalParameters = new ReactiveVar(false);
   instance.simulateMultipleResults = new ReactiveVar(false);
 
 });

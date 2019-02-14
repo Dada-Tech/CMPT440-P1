@@ -23,15 +23,15 @@
                     <label class="c-choice__label" for="radio3">Dynamic Population</label>
                 </div>
 
-                <div class="c-switch u-mr-small">
-                                <input class="c-switch__input" id="switch1 universalParametersCheckbox" type="checkbox" checked="">
-                                <label class="c-switch__label" for="switch1 universalParametersLabel">Use Universal Parameters</label>
-                            </div>
-
-                            <div class="c-switch u-mr-small ">
+                            <div class="c-switch u-mr-small simulateMultiple">
                                             <input class="c-switch__input simulateMultipleCheckbox" id="switch2" type="checkbox">
                                             <label class="c-switch__label simulateMultipleLabel" for="switch2">Simulate Multiple Scenarios</label>
                                         </div>
+
+                                        <div class="c-switch u-mr-small universalParametersSwitch">
+                                                        <input class="c-switch__input universalParametersCheckbox" id="switch1" type="checkbox" >
+                                                        <label class="c-switch__label universalParametersLabel" for="switch1">Use Universal Parameters</label>
+                                                    </div>
             </form>
           </header><!-- // .c-navbar -->
           {{#if universalParameters}}

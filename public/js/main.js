@@ -31449,7 +31449,7 @@ var Switch = function(){
         		$(this).addClass('is-active');
 	     	}
     	}
-        return false;
+        // return false;
     });
 };
 //
@@ -31465,7 +31465,7 @@ var Toggle = function() {
 			.addClass('is-active')
 			.siblings()
 			.removeClass('is-active');
-		return false;
+		// return false;
 	});
 };
 //
