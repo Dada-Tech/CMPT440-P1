@@ -14,9 +14,7 @@ Template.Graph.events({
 });
 
 Template.Graph.onCreated(function() {
-  instance.modelName = new ReactiveVar("SIRS");
-
-  instance.modelName.set("SIR");
+  
   var instance;
   instance = this;
   // alert("Hi");
@@ -29,7 +27,9 @@ Template.Graph.onCreated(function() {
   var birth_rate = 0;
   var death_rate = 0;
   var days = 50;
+  instance.modelName = new ReactiveVar("SIRS");
 
+  instance.modelName.set("SIR");
 
 
   
