@@ -101,7 +101,7 @@ else{
 
 
 },
-'click .simulateMultipleResults'(event, instance) {
+'click .simulateMultipleResults '(event, instance) {
   event.preventDefault();
   event.stopPropagation();
   appVariableScope.simulateMultipleResults.set(true);
@@ -142,7 +142,7 @@ Template.Home.onCreated(function() {
   appVariableScope.simulateMultipleResults = new ReactiveVar(false);
   appVariableScope.simulateSingleInput = new ReactiveVar({});
   appVariableScope.simulateMultipleInput = new ReactiveVar([]);
-  appVariableScope.simulateDynamicPopulation = new ReactiveVar(true);
+  appVariableScope.simulateDynamicPopulation = new ReactiveVar(false);
   appVariableScope.simulateHerdImmunity = new ReactiveVar(false);
 
 });

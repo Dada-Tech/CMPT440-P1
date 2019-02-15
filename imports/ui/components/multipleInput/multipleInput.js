@@ -4,6 +4,9 @@ import { Meteor } from 'meteor/meteor'
 Template.multipleInput.helpers({
   entries () {
     return appVariableScope.simulateMultipleInput.get();
+  },
+  simulateDynamicPopulation () {
+    return appVariableScope.simulateDynamicPopulation.get();
   }
 
 

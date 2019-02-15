@@ -21,8 +21,10 @@
                         <th class="c-table__cell c-table__cell--head">Infected Pop.</th>
                         <th class="c-table__cell c-table__cell--head">Recovered Pop.</th>
                         <th class="c-table__cell c-table__cell--head">Susceptible Pop.</th>
-                        <th class="c-table__cell c-table__cell--head">Death Rate</th>
-                        <th class="c-table__cell c-table__cell--head">Birth Rate</th>
+                        {{#if simulateDynamicPopulation}}
+                          <th class="c-table__cell c-table__cell--head">Death Rate</th>
+                          <th class="c-table__cell c-table__cell--head">Birth Rate</th>
+                        {{/if}}
                         <th class="c-table__cell c-table__cell--head">
                             <span class="">Days</span>
                         </th>
@@ -49,12 +51,14 @@
                           <td class="c-table__cell">
                               <input class="c-input" type="text" id="input1" placeholder="0.0">
                           </td>
+                          {{#if simulateDynamicPopulation}}
                           <td class="c-table__cell">
                               <input class="c-input" type="text" id="input1" placeholder="0.0">
                           </td>
                           <td class="c-table__cell">
                               <input class="c-input" type="text" id="input1" placeholder="0.0">
                           </td>
+                          {{/if}}
                           <td class="c-table__cell">
                               <input class="c-input" type="text" id="input1" placeholder="0.0">
                           </td>
