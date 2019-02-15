@@ -41,6 +41,9 @@ Template.Graph.onRendered(function() {
       // alert("Hello");
       // var chartPayout = document.getElementById("js-chart-payout");
       var chartPayout = $(".chart");
+      for (var i = 0; i < chartPayout.length; i++) {
+        var chart = chartPayout[i];
+
       var lineChartPayoutData = {
     	    labels: ["January 1", "January 5", "January 10", "January 15", "January 20", "January 25"],
     	    datasets: [{
@@ -70,7 +73,7 @@ Template.Graph.onRendered(function() {
     	    }]
     	};
 
-    var lineChartPayout = new Chart(chartPayout, {
+    var lineChartPayout = new Chart(chart, {
         type: 'line',
         data: lineChartPayoutData,
         options: {
@@ -99,7 +102,7 @@ Template.Graph.onRendered(function() {
         }
       }
     });
-
+          }
   }, 500);
 
 
