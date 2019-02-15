@@ -91,6 +91,7 @@ reactive-dict@1.2.0
 reactive-var@1.0.11
 reload@1.1.11
 retry@1.0.9
+rosh93:slide-panel@0.1.6
 routepolicy@1.0.12
 seba:minifiers-autoprefixer@1.0.1
 service-configuration@1.0.11

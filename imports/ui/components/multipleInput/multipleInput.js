@@ -2,17 +2,21 @@ import { Template } from 'meteor/templating'
 import { Meteor } from 'meteor/meteor'
 
 Template.multipleInput.helpers({
-  // simulateMultiple () {
-  //   return Template.instance().simulateMultiple.get();
-  // }
+  entries () {
+    return appVariableScope.simulateMultipleInput.get();
+  },
+  simulateDynamicPopulation () {
+    return appVariableScope.simulateDynamicPopulation.get();
+  }
 
 
 });
 
 Template.multipleInput.events({
-    'click .simulateMultiple'(event, instance) {
-      // event.preventDefault();
-      // event.stopPropagation();
+    'click .addInput'(event, instance) {
+      var mulipleInputs = appVariableScope.simulateMultipleInput.get();
+      mulipleInputs.push({});
+      appVariableScope.simulateMultipleInput.set(mulipleInputs);
   }
 });
 

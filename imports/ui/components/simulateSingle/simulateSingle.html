@@ -3,6 +3,7 @@
       <div class="row">
           <div class="col-xl-8">
               {{> Graph s=susceptible_population i=4 r=10 beta=20 gammma=0 birth_rate=0 death_rate=0}}
+              <!-- {{> Graph}} -->
           </div>
 
           <div class="col-xl-4">
@@ -41,6 +42,18 @@
                       <label class="c-field__label" for="input3">Days</label>
                       <input class="c-input" type="text" id="input3" placeholder="Days">
                   </div>
+
+                  {{#if simulateDynamicPopulation}}
+                    <div class="c-field u-mb-small">
+                        <label class="c-field__label" for="input3">Birth Rate</label>
+                        <input class="c-input" type="text" id="input3" placeholder="0">
+                    </div>
+
+                    <div class="c-field u-mb-small">
+                        <label class="c-field__label" for="input3">Death Rate</label>
+                        <input class="c-input" type="text" id="input3" placeholder="0">
+                    </div>
+                  {{/if}}
 
                   <button class="c-btn c-btn--info c-btn--fullwidth simulate" type="submit">Submit</button>
               </form>
