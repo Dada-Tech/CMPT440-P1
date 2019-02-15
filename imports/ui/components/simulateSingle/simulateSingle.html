@@ -1,0 +1,51 @@
+<template name="simulateSingle">
+  <div class="container  u-mt-medium">
+      <div class="row">
+          <div class="col-xl-8">
+              {{> Graph}}
+          </div>
+
+          <div class="col-xl-4">
+            <div class="c-card u-mb-xsmall">
+              <!-- <header class="c-card__header u-pt-large">
+                  <h1 class="u-h3 u-text-center u-mb-zero">Input disease parameters</h1>
+              </header> -->
+
+              <form class="c-card__body">
+                  <div class="c-field u-mb-small">
+                      <label class="c-field__label" for="input1">Beta</label>
+                      <input class="c-input" type="text" id="input1" placeholder="0.0">
+                  </div>
+
+                  <div class="c-field u-mb-small">
+                      <label class="c-field__label" for="input2">Gamma</label>
+                      <input class="c-input" type="text" id="input2" placeholder="0.0">
+                  </div>
+
+                  <div class="c-field u-mb-small">
+                      <label class="c-field__label" for="input3">Susceptible Population</label>
+                      <input class="c-input" type="text" id="input3" placeholder="1000">
+                  </div>
+
+                  <div class="c-field u-mb-small">
+                      <label class="c-field__label" for="input3">Infected Population</label>
+                      <input class="c-input" type="text" id="input3" placeholder="200">
+                  </div>
+
+                  <div class="c-field u-mb-small">
+                      <label class="c-field__label" for="input3">Recovered Population</label>
+                      <input class="c-input" type="text" id="input3" placeholder="800">
+                  </div>
+
+                  <div class="c-field u-mb-small">
+                      <label class="c-field__label" for="input3">Days</label>
+                      <input class="c-input" type="text" id="input3" placeholder="Days">
+                  </div>
+
+                  <button class="c-btn c-btn--info c-btn--fullwidth" type="submit">Submit</button>
+              </form>
+          </div>
+          </div>
+      </div><!-- // .row -->
+  </div>
+</template>
