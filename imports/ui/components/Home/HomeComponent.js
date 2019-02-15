@@ -10,7 +10,9 @@ import '../Graph/Graph.html';
 import '../Graph/Graph.js';
 import '../universalInputParameters/universalInputParameters.html'
 import '../multipleInput/multipleInput.html'
+import '../multipleInput/multipleInput.js'
 import '../simulateMultiple/simulateMultiple.html'
+import '../simulateMultiple/simulateMultiple.js'
 import '../simulateSingle/simulateSingle.html'
 
 
