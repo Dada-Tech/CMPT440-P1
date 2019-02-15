@@ -42,6 +42,21 @@ Template.Home.events({
 
 
 
+  }, // this is for SIR Model, we will be creating the SIR Model with no
+  	 // extra parameters, just calculating susceptible, infected, recovered
+     'click .simulateSingle'(event, instance) {
+      // event.preventDefault();
+      // event.stopPropagation();
+
+      var event_instance = instance;
+      var susceptiblePopulation = $('.inputSusceptible').val();
+      var infectedPopulation = $('.inputInfected').val();
+      var recoveredPopulation = $('.inputRecovered').val();
+
+
+
+
+
   },
   'click .universalParametersSwitch'(event, instance) {
     // event.preventDefault();
