@@ -6,19 +6,26 @@ import '../base/Container.html'
 import '../base/Link.html'
 import '../base/Button.html'
 import './HomeComponent.html'
+import '../universalInputParameters/universalInputParameters.html'
+import '../multipleInput/multipleInput.html'
+import '../simulateMultiple/simulateMultiple.html'
+import '../simulateSingle/simulateSingle.html'
+import '../Graph/Graph.html'
+
+appVariableScope = {}
 
 Template.Home.helpers({
   settings () {
     return Meteor.settings.public
   },
-  simulateMultiple () {
-    return Template.instance().simulateMultiple.get();
+  simulateMultipleDiseases () {
+    return appVariableScope.simulateMultiple.get();
   },
   universalParameters () {
-    return Template.instance().universalParameters.get();
+    return appVariableScope.universalParameters.get();
   },
   simulateMultipleResults () {
-    return Template.instance().simulateMultipleResults.get();
+    return appVariableScope.simulateMultipleResults.get();
   },
 
 
@@ -32,10 +39,10 @@ Template.Home.events({
       var event_instance = instance;
       var el = $('.simulateMultipleCheckbox');
       if (el.is(':checked') == true){
-        event_instance.simulateMultiple.set(true);
+        appVariableScope.simulateMultiple.set(true);
       }
       else{
-        event_instance.simulateMultiple.set(false);
+        appVariableScope.simulateMultiple.set(false);
       }
 
 
@@ -66,10 +73,10 @@ Template.Home.events({
   var event_instance = instance;
   var el = $('.universalParametersCheckbox');
   if (el.is(':checked') == true){
-    event_instance.universalParameters.set(true);
+    appVariableScope.universalParameters.set(true);
   }
   else{
-    event_instance.universalParameters.set(false);
+    appVariableScope.universalParameters.set(false);
   }
 
 
@@ -77,26 +84,29 @@ Template.Home.events({
 'click .simulateMultipleResults'(event, instance) {
   event.preventDefault();
   event.stopPropagation();
-  instance.simulateMultipleResults.set(true);
+  appVariableScope.simulateMultipleResults.set(true);
 },
 'click .simulateMultipleEdit'(event, instance) {
   event.preventDefault();
   event.stopPropagation();
-  instance.simulateMultipleResults.set(false);
+  appVariableScope.simulateMultipleResults.set(false);
 },
 });
 
 Template.Home.onCreated(function() {
   var instance;
   instance = this;
-  instance.simulateMultiple = new ReactiveVar(false);
-  instance.universalParameters = new ReactiveVar(false);
-  instance.simulateMultipleResults = new ReactiveVar(false);
+  appVariableScope.simulateMultiple = new ReactiveVar(false);
+  appVariableScope.universalParameters = new ReactiveVar(false);
+  appVariableScope.simulateMultipleResults = new ReactiveVar(false);
+  appVariableScope.simulateSingleInput = new ReactiveVar({});
+  appVariableScope.simulateMultipleInput = new ReactiveVar([]);
 
 });
 
 Template.Home.onRendered(function() {
     Meteor.Loader.loadJs("/js/main.js");
+    Meteor.Loader.loadJs("/js/plotly.js");
 
 });
 

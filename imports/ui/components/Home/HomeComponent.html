@@ -1,284 +1,43 @@
 <template name="Home">
-      <!--[if lte IE 9]>
-          <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-      <![endif]-->
-
-      <!-- MAIN CONTENT -->
       <main class="">
-          <header class="c-navbar d-flex align-items-center">
+        <header class="c-navbar d-flex align-items-center">
+            <h2 class="c-navbar__title u-mr-auto">Select all that apply</h2>
+            <form class=" d-flex align-items-center">
+              <div class="c-choice c-choice--radio u-mr-small u-mb-zero">
+                  <input class="c-choice__input" id="radio2" name="radios" type="radio">
+                  <label class="c-choice__label" for="radio2">Herd Immunity</label>
+              </div>
 
+              <div class="c-choice c-choice--radio u-mr-small u-mb-zero">
+                  <input class="c-choice__input" id="radio3" name="radioss" type="radio">
+                  <label class="c-choice__label" for="radio3">Dynamic Population</label>
+              </div>
 
-              <h2 class="c-navbar__title u-mr-auto">Select all that apply</h2>
+              <div class="c-switch u-mr-small simulateMultiple">
+                  <input class="c-switch__input simulateMultipleCheckbox" id="switch2" type="checkbox">
+                  <label class="c-switch__label simulateMultipleLabel" for="switch2">Simulate Multiple Scenarios</label>
+              </div>
 
-              <form class=" d-flex align-items-center">
+              <div class="c-switch u-mr-small universalParametersSwitch">
+                  <input class="c-switch__input universalParametersCheckbox" id="switch1" type="checkbox" >
+                  <label class="c-switch__label universalParametersLabel" for="switch1">Use Universal Parameters</label>
+              </div>
+          </form>
+        </header>
 
-
-                <div class="c-choice c-choice--radio u-mr-small u-mb-zero">
-                    <input class="c-choice__input" id="radio2" name="radios" type="radio">
-                    <label class="c-choice__label" for="radio2">Herd Immunity</label>
-                </div>
-
-                <div class="c-choice c-choice--radio u-mr-small u-mb-zero">
-                    <input class="c-choice__input" id="radio3" name="radioss" type="radio">
-                    <label class="c-choice__label" for="radio3">Dynamic Population</label>
-                </div>
-
-                            <div class="c-switch u-mr-small simulateMultiple">
-                                            <input class="c-switch__input simulateMultipleCheckbox" id="switch2" type="checkbox">
-                                            <label class="c-switch__label simulateMultipleLabel" for="switch2">Simulate Multiple Scenarios</label>
-                                        </div>
-
-                                        <div class="c-switch u-mr-small universalParametersSwitch">
-                                                        <input class="c-switch__input universalParametersCheckbox" id="switch1" type="checkbox" >
-                                                        <label class="c-switch__label universalParametersLabel" for="switch1">Use Universal Parameters</label>
-                                                    </div>
-            </form>
-          </header><!-- // .c-navbar -->
-          {{#if universalParameters}}
-          <div class="c-toolbar">
-            <h3 class="c-toolbar__title has-divider"></h3>
-
-
-                        <div class="c-field c-field--inline u-mr-small">
-                            <label class="c-field__label" for="input2">Susceptible Population</label>
-                            <input class="c-input" type="text" placeholder="Susceptible Population">
-                        </div>
-                        <div class="c-field c-field--inline u-mr-small">
-                            <label class="c-field__label" for="input2">Infected Population</label>
-                            <input class="c-input" type="text" placeholder="Infected Population">
-                        </div>
-                        <div class="c-field c-field--inline u-mr-small">
-                            <label class="c-field__label" for="input2">Recovered Population</label>
-                            <input class="c-input" type="text" placeholder="Recovered Population">
-                        </div>
-
-                        <div class="c-field c-field--inline u-mr-small">
-                            <label class="c-field__label" for="input2">Days</label>
-                            <input class="c-input" type="text" placeholder="Days ">
-                        </div>
-                        <div class="c-field c-field--inline u-mr-small">
-                            <label class="c-field__label" for="input2">Birth Rate</label>
-                            <input class="c-input" type="text" placeholder="Birth Rate ">
-                        </div>
-                        <div class="c-field c-field--inline u-mr-small">
-                            <label class="c-field__label" for="input2">Death Rate</label>
-                            <input class="c-input" type="text" placeholder="Death Rate ">
-                        </div>
-        </div>
+        {{#if universalParameters}}
+            {{> universalInputParameters}}
         {{/if}}
 
-          {{#if simulateMultiple}}
+        {{#if simulateMultipleDiseases}}
           {{#if simulateMultipleResults}}
-          <div class="c-toolbar u-mb-medium">
-            <h3 class="c-toolbar__title has-divider">
-              Multiple Disease Simulation
-            </h3>
-
-                        <button class="c-btn c-btn--info  simulateMultipleEdit " style="float: right !important;">Edit Data</button>
-
-        </div>
-          <div class="container-fluid">
-              <div class="row">
-                  <div class="col-xl-3">
-                      <div class="c-graph-card" data-mh="graph-cards" style="height: 400px;">
-                          <div class="c-graph-card__content">
-                              <h3 class="c-graph-card__title">Disease 1</h3>
-                              <p class="c-graph-card__date">A - 0.3 | B - 0.2 | S - 134 | I - 12 | R - 5</p>
-                              <h4 class="c-graph-card__number">0.03</h4>
-                              <p class="c-graph-card__status">Disease with fast spread e.g Ebola</p>
-                          </div>
-
-                          <div class="c-graph-card__chart"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                              <canvas id="js-chart-payout" width="610" height="350" class="chartjs-render-monitor" style="display: block; height: 75px; width: 305px;"></canvas>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-xl-3">
-                      <div class="c-graph-card" data-mh="graph-cards" style="height: 303px;">
-                          <div class="c-graph-card__content">
-                              <h3 class="c-graph-card__title">Disease 2</h3>
-                              <p class="c-graph-card__date">A - 0.3 | B - 0.2 | S - 134 | I - 12 | R - 5</p>
-                              <h4 class="c-graph-card__number">0.03</h4>
-                              <p class="c-graph-card__status">Disease with fast spread e.g Ebola</p>
-                          </div>
-
-                          <div class="c-graph-card__chart"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                              <canvas id="js-chart-payout" width="610" height="150" class="chartjs-render-monitor" style="display: block; height: 75px; width: 305px;"></canvas>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-xl-3">
-                      <div class="c-graph-card" data-mh="graph-cards" style="height: 303px;">
-                          <div class="c-graph-card__content">
-                              <h3 class="c-graph-card__title">Disease 3</h3>
-                              <p class="c-graph-card__date">A - 0.3 | B - 0.2 | S - 134 | I - 12 | R - 5</p>
-                              <h4 class="c-graph-card__number">0.03</h4>
-                              <p class="c-graph-card__status">Disease with fast spread e.g Ebola</p>
-                          </div>
-
-                          <div class="c-graph-card__chart"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                              <canvas id="js-chart-payout" width="610" height="150" class="chartjs-render-monitor" style="display: block; height: 75px; width: 305px;"></canvas>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-xl-3">
-                      <div class="c-graph-card" data-mh="graph-cards" style="height: 303px;">
-                          <div class="c-graph-card__content">
-                              <h3 class="c-graph-card__title">Disease 4</h3>
-                              <p class="c-graph-card__date">A - 0.3 | B - 0.2 | S - 134 | I - 12 | R - 5</p>
-                              <h4 class="c-graph-card__number">0.03</h4>
-                              <p class="c-graph-card__status">Disease with fast spread e.g Ebola</p>
-                          </div>
-
-                          <div class="c-graph-card__chart"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                              <canvas id="js-chart-payout" width="610" height="150" class="chartjs-render-monitor" style="display: block; height: 75px; width: 305px;"></canvas>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-
-
-
-
-          </div>
+            {{> simulateMultiple}}
           {{else}}
-          <div class="container u-mt-medium">
-            <div class="row">
-            <div class="col-xl-12">
-              <div class="c-table-responsive@desktop">
-                      <table class="c-table c-table--highlight u-mb-small">
-
-                          <caption class="c-table__title">
-                              Multiple Disease Simulation <small>Please enter all parameters necessary in the table below</small>
-
-                              <button class="c-btn c-btn--success float-right u-ml-small" style="float: right !important;">+</button>
-                              <button class="c-btn c-btn--info float-right simulateMultipleResults" style="float: right !important;">Simulate Diseases</button>
-                          </caption>
-
-                          <thead class="c-table__head c-table__head--slim">
-                              <tr class="c-table__row">
-                                <th class="c-table__cell c-table__cell--head">Beta</th>
-                                <th class="c-table__cell c-table__cell--head">Gamma</th>
-                                <th class="c-table__cell c-table__cell--head">Infected Pop.</th>
-                                <th class="c-table__cell c-table__cell--head">Recovered Pop.</th>
-                                <th class="c-table__cell c-table__cell--head">Susceptible Pop.</th>
-                                <th class="c-table__cell c-table__cell--head">Death Rate</th>
-                                <th class="c-table__cell c-table__cell--head">Birth Rate</th>
-                                <th class="c-table__cell c-table__cell--head">
-                                    <span class="u-hidden-visually">Actions</span>
-                                </th>
-                              </tr>
-                          </thead>
-
-                          <tbody>
-                              <tr class="c-table__row c-table__row--danger">
-                                  <td class="c-table__cell">
-                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
-                                  </td>
-
-                                  <td class="c-table__cell">
-                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
-                                  </td>
-                                  <td class="c-table__cell">
-                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
-                                  </td>
-                                  <td class="c-table__cell">
-                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
-                                  </td>
-                                  <td class="c-table__cell">
-                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
-                                  </td>
-                                  <td class="c-table__cell">
-                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
-                                  </td>
-                                  <td class="c-table__cell">
-                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
-                                  </td>
-                                  <td class="c-table__cell">
-                                      <input class="c-input" type="text" id="input1" placeholder="0.0">
-                                  </td>
-
-                              </tr>
-
-
-
-
-
-
-
-
-                          </tbody>
-                      </table>
-                  </div>
-              </div>
-              </div>
-            </div>
+            {{> multipleInput}}
           {{/if}}
-
-
-
-
-          {{else}}
-
-            <div class="container  u-mt-medium">
-                <div class="row">
-                    <div class="col-xl-8">
-                        <div class="c-card u-p-medium u-mb-medium">
-                            <div class="u-flex u-justify-between u-align-items-center">
-                                <h3 class="c-card__title">Simulation</h3>
-                                <span class="u-text-small u-text-uppercase u-text-mute"> SIR Model</span>
-                            </div>
-
-                            <canvas id="js-chart-revenue" width="300" height="178"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-4">
-                      <div class="c-card u-mb-xsmall">
-                        <!-- <header class="c-card__header u-pt-large">
-                            <h1 class="u-h3 u-text-center u-mb-zero">Input disease parameters</h1>
-                        </header> -->
-
-                        <form class="c-card__body">
-                            <div class="c-field u-mb-small">
-                                <label class="c-field__label" for="input1">Beta</label>
-                                <input class="c-input inputBeta" type="text" id="input1" placeholder="0.0">
-                            </div>
-
-                            <div class="c-field u-mb-small">
-                                <label class="c-field__label" for="input2">Gamma</label>
-                                <input class="c-input inputGamma" type="text" id="input2" placeholder="0.0">
-                            </div>
-
-                            <div class="c-field u-mb-small">
-                                <label class="c-field__label" for="input3">Susceptible Population</label>
-                                <input class="c-input inputSusceptible" type="text" id="input3" placeholder="1000">
-                            </div>
-
-                            <div class="c-field u-mb-small">
-                                <label class="c-field__label" for="input3">Infected Population</label>
-                                <input class="c-input inputInfected" type="text" id="input3" placeholder="200">
-                            </div>
-
-                            <div class="c-field u-mb-small">
-                                <label class="c-field__label" for="input3">Recovered Population</label>
-                                <input class="c-input inputRecovered" type="text" id="input3" placeholder="800">
-                            </div>
-
-                            <div class="c-field u-mb-small">
-                                <label class="c-field__label" for="input3">Days</label>
-                                <input class="c-input inputDays" type="text" id="input3" placeholder="Days">
-                            </div>
-
-                            <button class="c-btn c-btn--info c-btn--fullwidth simulateSingle" type="submit">Submit</button>
-                        </form>
-                    </div>
-                    </div>
-                </div><!-- // .row -->
-            </div><!-- // .container -->
-          {{/if}}
-
+        {{else}}
+          {{> simulateSingle}}
+        {{/if}}
 
       </main>
 </template>
