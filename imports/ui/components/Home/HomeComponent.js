@@ -168,6 +168,8 @@ Template.Home.onRendered(function() {
         // return false;
     });
 
+    slidePanel.overlay(true);
+
 });
 
 Template.Home.onDestroyed(function() {

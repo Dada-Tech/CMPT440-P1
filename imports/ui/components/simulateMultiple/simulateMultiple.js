@@ -12,9 +12,10 @@ Template.simulateMultiple.helpers({
 });
 
 Template.simulateMultiple.events({
-    'click .simulateMultiple'(event, instance) {
-      // event.preventDefault();
-      // event.stopPropagation();
+  'click .showInDetail'(event, instance) {
+    // event.preventDefault();
+    // event.stopPropagation();
+    slidePanel.showPanel('simulateSingle', {});
   }
 });
 
