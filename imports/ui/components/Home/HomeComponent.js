@@ -6,11 +6,13 @@ import '../base/Container.html'
 import '../base/Link.html'
 import '../base/Button.html'
 import './HomeComponent.html'
+import '../Graph/Graph.html';
+import '../Graph/Graph.js';
 import '../universalInputParameters/universalInputParameters.html'
 import '../multipleInput/multipleInput.html'
 import '../simulateMultiple/simulateMultiple.html'
 import '../simulateSingle/simulateSingle.html'
-import '../Graph/Graph.html'
+
 
 appVariableScope = {}
 

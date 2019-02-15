@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating'
 import { Meteor } from 'meteor/meteor'
 
+import '../Graph/Graph.html';
+
 Template.simulateMultiple.helpers({
   // simulateMultiple () {
   //   return Template.instance().simulateMultiple.get();

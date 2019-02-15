@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating'
 import { Meteor } from 'meteor/meteor'
 
+
+
 Template.simulateSingle.helpers({
   susceptible_population () {
     return Template.instance().susceptible.get();

@@ -19,7 +19,7 @@ Template.Graph.events({
 Template.Graph.onCreated(function() {
   var instance;
   instance = this;
-  alert("Hi");
+  // alert("Hi");
   var susceptible_population = 3;
   var infected_population = 4;
   var recovered_population = 5;
@@ -34,8 +34,75 @@ Template.Graph.onCreated(function() {
 });
 
 Template.Graph.onRendered(function() {
-  alert("Hi");
-    // Meteor.Loader.loadJs("/js/main.js");
+  // alert("Hi");
+
+    setTimeout(function(){
+
+      // alert("Hello");
+      // var chartPayout = document.getElementById("js-chart-payout");
+      var chartPayout = $(".chart");
+      var lineChartPayoutData = {
+    	    labels: ["January 1", "January 5", "January 10", "January 15", "January 20", "January 25"],
+    	    datasets: [{
+    			label: "Sold",
+    			fill: true,
+    			lineTension: 0,
+    			backgroundColor: 'rgba(163,136,227, 0.1)',
+    			borderWidth: 2,
+    			borderColor: "#886CE6",
+    			borderCapStyle: 'butt',
+    			borderDash: [],
+    			borderDashOffset: 0.0,
+    			borderJoinStyle: 'miter',
+    			pointStyle: 'cross',
+    			pointRadius: 0,
+    			pointBorderColor: "#fff",
+    			pointBackgroundColor: "#2a2f37",
+    			pointBorderWidth: 2,
+    			pointHoverRadius: 6,
+    			pointHoverBackgroundColor: "#FC2055",
+    			pointHoverBorderColor: "#fff",
+    			pointHoverBorderWidth: 2,
+    			pointRadius: 4,
+    			pointHitRadius: 5,
+    			data: [40, 32, 42, 28, 53, 34],
+    			spanGaps: false
+    	    }]
+    	};
+
+    var lineChartPayout = new Chart(chartPayout, {
+        type: 'line',
+        data: lineChartPayoutData,
+        options: {
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [{
+              display: false,
+              ticks: {
+              fontSize: '11',
+              fontColor: '#969da5'
+            },
+            gridLines: {
+              color: 'rgba(0,0,0,0.0)',
+              zeroLineColor: 'rgba(0,0,0,0.0)'
+            }
+          }],
+          yAxes: [{
+            display: false,
+            ticks: {
+              beginAtZero: true,
+              max: 55
+            }
+          }]
+        }
+      }
+    });
+
+  }, 500);
+
+
 
 });
 
