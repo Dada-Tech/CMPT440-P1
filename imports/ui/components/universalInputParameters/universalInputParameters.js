@@ -2,9 +2,9 @@ import { Template } from 'meteor/templating'
 import { Meteor } from 'meteor/meteor'
 
 Template.universalInputParameters.helpers({
-  // simulateMultiple () {
-  //   return Template.instance().simulateMultiple.get();
-  // }
+  simulateDynamicPopulation () {
+    return appVariableScope.simulateDynamicPopulation.get();
+  }
 
 
 });

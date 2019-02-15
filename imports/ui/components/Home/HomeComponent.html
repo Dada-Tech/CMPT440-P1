@@ -8,9 +8,9 @@
                   <label class="c-choice__label" for="radio2">Herd Immunity</label>
               </div>
 
-              <div class="c-choice c-choice--radio u-mr-small u-mb-zero">
-                  <input class="c-choice__input" id="radio3" name="radioss" type="radio">
-                  <label class="c-choice__label" for="radio3">Dynamic Population</label>
+              <div class="c-switch u-mr-small dynamicPopulationSwitch">
+                  <input class="c-switch__input simulateDynamicPopulationCheckbox" id="switch2" type="checkbox">
+                  <label class="c-switch__label simulateDynamicPopulationLabel" for="switch2">Dynamic Population</label>
               </div>
 
               <div class="c-switch u-mr-small simulateMultiple">
@@ -18,10 +18,13 @@
                   <label class="c-switch__label simulateMultipleLabel" for="switch2">Simulate Multiple Scenarios</label>
               </div>
 
+
+              {{#if simulateMultipleDiseases}}
               <div class="c-switch u-mr-small universalParametersSwitch">
                   <input class="c-switch__input universalParametersCheckbox" id="switch1" type="checkbox" >
                   <label class="c-switch__label universalParametersLabel" for="switch1">Use Universal Parameters</label>
               </div>
+              {{/if}}
           </form>
         </header>
 

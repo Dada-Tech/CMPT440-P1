@@ -20,13 +20,16 @@
                     <label class="c-field__label" for="input2">Days</label>
                     <input class="c-input" type="text" placeholder="Days ">
                 </div>
-                <div class="c-field c-field--inline u-mr-small">
-                    <label class="c-field__label" for="input2">Birth Rate</label>
-                    <input class="c-input" type="text" placeholder="Birth Rate ">
-                </div>
-                <div class="c-field c-field--inline u-mr-small">
-                    <label class="c-field__label" for="input2">Death Rate</label>
-                    <input class="c-input" type="text" placeholder="Death Rate ">
-                </div>
+
+                {{#if simulateDynamicPopulation}}
+                  <div class="c-field c-field--inline u-mr-small">
+                      <label class="c-field__label" for="input2">Birth Rate</label>
+                      <input class="c-input" type="text" placeholder="Birth Rate ">
+                  </div>
+                  <div class="c-field c-field--inline u-mr-small">
+                      <label class="c-field__label" for="input2">Death Rate</label>
+                      <input class="c-input" type="text" placeholder="Death Rate ">
+                  </div>
+                {{/if}}
   </div>
 </template>
