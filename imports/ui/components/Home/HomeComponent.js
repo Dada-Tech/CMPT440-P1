@@ -149,7 +149,7 @@ Template.Home.onCreated(function() {
 
 Template.Home.onRendered(function() {
     Meteor.Loader.loadJs("/js/main.js");
-    Meteor.Loader.loadJs("/js/plotly.js");
+    
 
     var $switch = $('.c-switch');
 

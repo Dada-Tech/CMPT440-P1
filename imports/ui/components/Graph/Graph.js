@@ -1,9 +1,13 @@
 import { Template } from 'meteor/templating'
 import { Meteor } from 'meteor/meteor'
+import * as math from 'mathjs'
 
 Template.Graph.helpers({
   modelName () {
     return Template.instance().modelName.get();
+  },
+  random_id(){
+    return Template.instance().random_id.get(); 
   }
 
 
@@ -14,97 +18,77 @@ Template.Graph.events({
 });
 
 Template.Graph.onCreated(function() {
-  
+  Meteor.Loader.loadJs("/js/plotly.js");
+  // Meteor.Loader.loadJs("/js/math.js");
   var instance;
   instance = this;
   // alert("Hi");
-  var susceptible_population = 3;
-  var infected_population = 4;
-  var recovered_population = 5;
-  var total_population = susceptible_population + infected_population + recovered_population;
-  var beta = 5;
-  var gamma = 6;
-  var birth_rate = 0;
-  var death_rate = 0;
-  var days = 50;
+  instance.susceptible_population = new ReactiveVar(3);
+  instance.infected_population = new ReactiveVar(4);
+  instance.recovered_population = new ReactiveVar(5);
+  instance.total_population = new ReactiveVar(instance.susceptible_population.get() + instance.infected_population.get() + instance.recovered_population.get());
+  instance.beta = new ReactiveVar(5);
+  instance.gamma = new ReactiveVar(6);
+  instance.birth_rate = new ReactiveVar(4);
+  instance.death_rate = new ReactiveVar(3);
+  instance.days = new ReactiveVar(100);
   instance.modelName = new ReactiveVar("SIRS");
+  instance.random_id = new ReactiveVar(Math.random().toString(36).slice(2));
 
   instance.modelName.set("SIR");
+
+  //checking to see if we need to use SIRS model
+  //if birth and death rate = 0, not a dynamic population
+  if (instance.birth_rate.get() == 0 && instance.death_rate.get() == 0)
+  {
+    instance.modelName.set("SIR");
+    instance.susceptible_derivative = new ReactiveVar(-(instance.beta.get()) * instance.susceptible_population.get() * instance.infected_population.get() / instance.total_population.());
+    instance.infected_derivative = new ReactiveVar('beta * susceptible_population * infected_population / total_population - gamma * infected_population', 'infected_population');
+    instance.recovered_derivative = new ReactiveVar('gamma * infected_population', 'recovered_population');
+
+  } else //if birth and death rate > 0 then this uses a dynamic population, therefore we must include death and birth rate as variabeles
+  {
+    instance.modelName.set("SIR With Dynamics");
+    instance.susceptible_derivative = new ReactiveVar('(birth_rate * total_population) - (beta * susceptible_population * infected_population) - (death_rate * susceptible_population)', 'susceptible_population');
+    instance.infected_derivative = new ReactiveVar('(beta * susceptible_population * infected_population / total_population) - (gamma * infected_population) - (death_rate * infected_population)', 'infected_population');
+    instance.recovered_derivative = new ReactiveVar('(gamma * infected_population) - (death_rate * recovered_population)', 'recovered_population');
+
+
+  }
 
 
   
 
-  setTimeout(function(){
-    var chartPayout = $(".chart");
-    for (var i = 0; i < chartPayout.length; i++) {
-      var chart = chartPayout[i];
-
-    var lineChartPayoutData = {
-        labels: ["January 1", "January 5", "January 10", "January 15", "January 20", "January 25"],
-        datasets: [{
-        label: "Sold",
-        fill: true,
-        lineTension: 0,
-        backgroundColor: 'rgba(163,136,227, 0.1)',
-        borderWidth: 2,
-        borderColor: "#886CE6",
-        borderCapStyle: 'butt',
-        borderDash: [],
-        borderDashOffset: 0.0,
-        borderJoinStyle: 'miter',
-        pointStyle: 'cross',
-        pointRadius: 0,
-        pointBorderColor: "#fff",
-        pointBackgroundColor: "#2a2f37",
-        pointBorderWidth: 2,
-        pointHoverRadius: 6,
-        pointHoverBackgroundColor: "#FC2055",
-        pointHoverBorderColor: "#fff",
-        pointHoverBorderWidth: 2,
-        pointRadius: 4,
-        pointHitRadius: 5,
-        data: [40, 32, 42, 28, 53, 34],
-        spanGaps: false
-        }]
-    };
-
-  var lineChartPayout = new Chart(chart, {
-      type: 'line',
-      data: lineChartPayoutData,
-      options: {
-      legend: {
-        display: false
-      },
-      scales: {
-        xAxes: [{
-            display: false,
-            ticks: {
-            fontSize: '11',
-            fontColor: '#969da5'
-          },
-          gridLines: {
-            color: 'rgba(0,0,0,0.0)',
-            zeroLineColor: 'rgba(0,0,0,0.0)'
-          }
-        }],
-        yAxes: [{
-          display: false,
-          ticks: {
-            beginAtZero: true,
-            max: 55
-          }
-        }]
-      }
-    }
-  });
-  }
-}, 500);
+  
 
 
 });
 
 Template.Graph.onRendered(function() {
   // alert("Hi");
+
+  var template_instance = Template.instance();
+
+  template_instance.susceptible_derivative.get();
+  setTimeout(function(){
+
+    
+    const xValues = math.range(0, 5, template_instance.days.get()).toArray();
+    const yValues = xValues.map(function (x) {
+      return math.derivative(template_instance.susceptible_derivative.get(), 'x').eval({x: x})
+    })
+
+    var trace = {
+      x: xValues,
+      y: yValues,
+      mode: 'line'
+    };
+    var data = [trace];
+
+    var chart_id = "chart-" + template_instance.random_id.get();
+    Plotly.newPlot(chart_id, data);
+
+}, 1000);
 });
 
 Template.Graph.onDestroyed(function() {
