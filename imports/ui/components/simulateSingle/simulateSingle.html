@@ -2,7 +2,7 @@
   <div class="container  u-mt-medium">
       <div class="row">
           <div class="col-xl-8">
-              {{> Graph s=susceptible_population i=infected_population r=10 beta=20 gammma=0 birth_rate=0 death_rate=0}}
+              {{> Graph s=susceptible_population i=infected_population r=recovered_population beta=beta_parameter gammma=gamma_parameter birth_rate=0 death_rate=0}}
               <!-- {{> Graph}} -->
           </div>
 
@@ -15,12 +15,12 @@
               <form class="c-card__body">
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input1">Beta</label>
-                      <input class="c-input" type="text" id="input1" placeholder="0.0">
+                      <input class="c-input inputBeta" type="text" id="input1" placeholder="0.0">
                   </div>
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input2">Gamma</label>
-                      <input class="c-input" type="text" id="input2" placeholder="0.0">
+                      <input class="c-input inputGamma" type="text" id="input2" placeholder="0.0">
                   </div>
 
                   <div class="c-field u-mb-small">
@@ -35,23 +35,23 @@
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input3">Recovered Population</label>
-                      <input class="c-input" type="text" id="input3" placeholder="800">
+                      <input class="c-input inputRecovered" type="text" id="input3" placeholder="800">
                   </div>
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input3">Days</label>
-                      <input class="c-input" type="text" id="input3" placeholder="Days">
+                      <input class="c-input inputDays" type="text" id="input3" placeholder="Days">
                   </div>
 
                   {{#if simulateDynamicPopulation}}
                     <div class="c-field u-mb-small">
                         <label class="c-field__label" for="input3">Birth Rate</label>
-                        <input class="c-input" type="text" id="input3" placeholder="0">
+                        <input class="c-input inputBirth" type="text" id="input3" placeholder="0">
                     </div>
 
                     <div class="c-field u-mb-small">
                         <label class="c-field__label" for="input3">Death Rate</label>
-                        <input class="c-input" type="text" id="input3" placeholder="0">
+                        <input class="c-input inputDeath" type="text" id="input3" placeholder="0">
                     </div>
                   {{/if}}
 
