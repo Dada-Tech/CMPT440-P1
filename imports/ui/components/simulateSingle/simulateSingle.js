@@ -9,8 +9,10 @@ Template.simulateSingle.helpers({
   },
   simulateDynamicPopulation () {
     return appVariableScope.simulateDynamicPopulation.get();
+  },
+  infected_population(){
+    return Template.instance().infected.get();
   }
-  
 
 
 });
@@ -18,14 +20,16 @@ Template.simulateSingle.helpers({
 Template.simulateSingle.events({
     'click .simulate'(event, instance) {
       var susceptible_population = $(".inputSusceptible").val();
+      var infected_population = $(".inputInfected").val();
       instance.susceptible.set(susceptible_population);
+      instance.infected.set(infected_population);
   }
 });
 
 Template.simulateSingle.onCreated(function() {
-  var instance;
-  instance = this;
+  var instance = this;
   instance.susceptible = new ReactiveVar(0);
+  instance.infected = new ReactiveVar(4);
 
 
 });

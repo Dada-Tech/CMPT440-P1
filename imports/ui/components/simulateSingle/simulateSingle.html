@@ -2,7 +2,7 @@
   <div class="container  u-mt-medium">
       <div class="row">
           <div class="col-xl-8">
-              {{> Graph s=susceptible_population i=4 r=10 beta=20 gammma=0 birth_rate=0 death_rate=0}}
+              {{> Graph s=susceptible_population i=infected_population r=10 beta=20 gammma=0 birth_rate=0 death_rate=0}}
               <!-- {{> Graph}} -->
           </div>
 
@@ -30,7 +30,7 @@
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input3">Infected Population</label>
-                      <input class="c-input" type="text" id="input3" placeholder="200">
+                      <input class="c-input inputInfected" type="text" id="input3" placeholder="200">
                   </div>
 
                   <div class="c-field u-mb-small">
