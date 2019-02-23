@@ -7,7 +7,7 @@ Template.Graph.helpers({
     return Template.instance().modelName.get();
   },
   random_id(){
-    return Template.instance().random_id.get(); 
+    return Template.instance().random_id.get();
   }
 
 
@@ -29,8 +29,8 @@ Template.Graph.onCreated(function() {
   instance.total_population = new ReactiveVar(instance.susceptible_population.get() + instance.infected_population.get() + instance.recovered_population.get());
   instance.beta = new ReactiveVar(5);
   instance.gamma = new ReactiveVar(6);
-  instance.birth_rate = new ReactiveVar(4);
-  instance.death_rate = new ReactiveVar(3);
+  instance.birth_rate = new ReactiveVar(0);
+  instance.death_rate = new ReactiveVar(0);
   instance.days = new ReactiveVar(100);
   instance.modelName = new ReactiveVar("SIRS");
   instance.random_id = new ReactiveVar(Math.random().toString(36).slice(2));
@@ -42,24 +42,24 @@ Template.Graph.onCreated(function() {
   if (instance.birth_rate.get() == 0 && instance.death_rate.get() == 0)
   {
     instance.modelName.set("SIR");
-    instance.susceptible_derivative = new ReactiveVar(-(instance.beta.get()) * instance.susceptible_population.get() * instance.infected_population.get() / instance.total_population.());
-    instance.infected_derivative = new ReactiveVar('beta * susceptible_population * infected_population / total_population - gamma * infected_population', 'infected_population');
-    instance.recovered_derivative = new ReactiveVar('gamma * infected_population', 'recovered_population');
+    // instance.susceptible_derivative = new ReactiveVar(-(instance.beta.get()) * instance.susceptible_population.get() * instance.infected_population.get() / instance.total_population.());
+    // instance.infected_derivative = new ReactiveVar('beta * susceptible_population * infected_population / total_population - gamma * infected_population', 'infected_population');
+    // instance.recovered_derivative = new ReactiveVar('gamma * infected_population', 'recovered_population');
 
   } else //if birth and death rate > 0 then this uses a dynamic population, therefore we must include death and birth rate as variabeles
   {
     instance.modelName.set("SIR With Dynamics");
-    instance.susceptible_derivative = new ReactiveVar('(birth_rate * total_population) - (beta * susceptible_population * infected_population) - (death_rate * susceptible_population)', 'susceptible_population');
-    instance.infected_derivative = new ReactiveVar('(beta * susceptible_population * infected_population / total_population) - (gamma * infected_population) - (death_rate * infected_population)', 'infected_population');
-    instance.recovered_derivative = new ReactiveVar('(gamma * infected_population) - (death_rate * recovered_population)', 'recovered_population');
+    // instance.susceptible_derivative = new ReactiveVar('(birth_rate * total_population) - (beta * susceptible_population * infected_population) - (death_rate * susceptible_population)', 'susceptible_population');
+    // instance.infected_derivative = new ReactiveVar('(beta * susceptible_population * infected_population / total_population) - (gamma * infected_population) - (death_rate * infected_population)', 'infected_population');
+    // instance.recovered_derivative = new ReactiveVar('(gamma * infected_population) - (death_rate * recovered_population)', 'recovered_population');
 
 
   }
 
 
-  
 
-  
+
+
 
 
 });
@@ -68,15 +68,19 @@ Template.Graph.onRendered(function() {
   // alert("Hi");
 
   var template_instance = Template.instance();
-
-  template_instance.susceptible_derivative.get();
+  console.log(template_instance.days.get());
+  // template_instance.susceptible_derivative.get();
   setTimeout(function(){
 
-    
-    const xValues = math.range(0, 5, template_instance.days.get()).toArray();
+
+    const xValues = math.range(0, template_instance.days.get(), 5).toArray();
     const yValues = xValues.map(function (x) {
-      return math.derivative(template_instance.susceptible_derivative.get(), 'x').eval({x: x})
+      // return math.derivative(template_instance.susceptible_derivative.get(), 'x').eval({x: x});
+      return x*2;
     })
+
+    console.log(xValues);
+    console.log(yValues);
 
     var trace = {
       x: xValues,
