@@ -10,9 +10,11 @@ Template.universalInputParameters.helpers({
 });
 
 Template.universalInputParameters.events({
-    'click .simulateMultiple'(event, instance) {
+    'keyup .aUniversalInput'(event, instance) {
       // event.preventDefault();
       // event.stopPropagation();
+      var variable_name = $(event.currentTarget).data('name');
+      appVariableScope[variable_name].set($(event.currentTarget).val());
   }
 });
 

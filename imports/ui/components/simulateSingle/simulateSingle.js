@@ -33,8 +33,10 @@ Template.simulateSingle.helpers({
   },
   infected_population(){
     return Template.instance().infected.get();
-  }
-
+  },
+  render_graph(){
+    return Template.instance().render_graph.get();
+  },
 
 });
 
@@ -65,6 +67,9 @@ Template.simulateSingle.events({
 
       var death_rate = $(".inputDeath").val();
       instance.days.set(death_rate);
+
+      instance.render_graph.set(true);
+
     }
 });
 
@@ -79,6 +84,7 @@ Template.simulateSingle.onCreated(function() {
   instance.days = new ReactiveVar(0);
   instance.birth = new ReactiveVar(0);
   instance.death = new ReactiveVar(0);
+  instance.render_graph = new ReactiveVar(false);
 
 });
 

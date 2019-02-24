@@ -50,6 +50,25 @@ Template.Home.events({
       else{
         appVariableScope.simulateMultiple.set(false);
       }
+      setTimeout(function(){
+        var $switch = $('.universalParametersSwitch');
+
+      $switch.on('click', function(e){
+          var $switchInput = $(this).find('.c-switch__input');
+
+          if ( !$(this).hasClass('is-disabled') ) {
+            if ($(this).hasClass('is-active') && $switchInput.attr('checked')) {
+                $switchInput.removeAttr('checked');
+                $(this).removeClass('is-active');
+            } else {
+                $switchInput.attr('checked', 'checked')
+                $(this).addClass('is-active');
+            }
+          }
+            // return false;
+        });
+
+      }, 500);
 
 
 
@@ -87,6 +106,22 @@ Template.Home.events({
 
 
 },
+'click .herdImmunitySwitch'(event, instance) {
+  // event.preventDefault();
+  // event.stopPropagation();
+
+
+var event_instance = instance;
+var el = $('.simulateHerdImmunityCheckbox');
+if (el.is(':checked') == true){
+  appVariableScope.simulateHerdImmunity.set(true);
+}
+else{
+  appVariableScope.simulateHerdImmunity.set(false);
+}
+
+
+},
 'click .dynamicPopulationSwitch'(event, instance) {
   // event.preventDefault();
   // event.stopPropagation();
@@ -105,25 +140,7 @@ else{
   event.preventDefault();
   event.stopPropagation();
   appVariableScope.simulateMultipleResults.set(true);
-  setTimeout(function(){
-    var $switch = $('.universalParametersSwitch');
 
-  $switch.on('click', function(e){
-      var $switchInput = $(this).find('.c-switch__input');
-
-      if ( !$(this).hasClass('is-disabled') ) {
-        if ($(this).hasClass('is-active') && $switchInput.attr('checked')) {
-            $switchInput.removeAttr('checked');
-            $(this).removeClass('is-active');
-        } else {
-            $switchInput.attr('checked', 'checked')
-            $(this).addClass('is-active');
-        }
-      }
-        // return false;
-    });
-
-  }, 500);
 
 
 },
@@ -149,7 +166,7 @@ Template.Home.onCreated(function() {
 
 Template.Home.onRendered(function() {
     Meteor.Loader.loadJs("/js/main.js");
-    
+
 
     var $switch = $('.c-switch');
 

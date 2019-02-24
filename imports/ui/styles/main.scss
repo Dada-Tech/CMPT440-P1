@@ -13589,3 +13589,15 @@ textarea.c-input {
   background-color: rgba(25,25,112,0.5) !important;
 
 }
+
+.herdImmunitySwitch.is-active::before {
+    background-color: #9d90e4;
+}
+
+.simulateMultiple.is-active::before {
+    background-color: #2da1f8;
+}
+
+.universalParametersSwitch.is-active::before {
+    background-color: #f8cf5d;
+}

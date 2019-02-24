@@ -11,13 +11,13 @@
           {{#each entries}}
           <div class="col-xl-3">
               <div class="c-graph-card" data-mh="graph-cards">
-                  <div class="c-graph-card__content">
+                  <div class="c-graph-card__content u-mb-small">
                       <h3 class="c-graph-card__title">Disease {{@index}}</h3>
-                      <p class="c-graph-card__date">A - 0.3 | B - 0.2 | S - 134 | I - 12 | R - 5</p>
-                      <h4 class="c-graph-card__number">0.03</h4>
+                      <p class="c-graph-card__date">A - {{beta}} | B - {{gamma}} | S - {{susceptible}} | I - {{infected}} | R - {{recovered}}</p>
+                      <h4 class="c-graph-card__number">{{days}} Days</h4>
                       <p class="c-graph-card__status">Disease with fast spread e.g Ebola</p>
                   </div>
-                  {{> Graph s=susceptible_population i=4 r=10 beta=20 gammma=0 birth_rate=0 death_rate=0}}
+                  {{> Graph s=susceptible i=infected r=recovered beta=beta gammma=gammma birth_rate=birth death_rate=death}}
               </div>
           </div>
           {{/each}}

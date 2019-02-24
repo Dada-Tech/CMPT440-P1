@@ -1,34 +1,34 @@
 <template name="universalInputParameters">
-  <div class="c-toolbar">
-    <h3 class="c-toolbar__title has-divider"></h3>
+  <div class="c-toolbar" style="display: flex !important; justify-content: space-between !important; align-items: center !important; flex-direction: row;">
+    <!-- <h3 class="c-toolbar__title has-divider" ></h3> -->
 
 
-                <div class="c-field c-field--inline u-mr-small">
+                <div class="c-field c-field--inline u-mr-small u-flex align-items-center flex-column">
                     <label class="c-field__label" for="input2">Susceptible Population</label>
-                    <input class="c-input" type="text" placeholder="Susceptible Population">
+                    <input class="c-input aUniversalInput u-text-center" type="text" placeholder="Susceptible Population" data-name="universal_susceptible">
                 </div>
-                <div class="c-field c-field--inline u-mr-small">
+                <div class="c-field c-field--inline u-mr-small u-flex align-items-center flex-column">
                     <label class="c-field__label" for="input2">Infected Population</label>
-                    <input class="c-input" type="text" placeholder="Infected Population">
+                    <input class="c-input aUniversalInput u-text-center" type="text" placeholder="Infected Population" data-name="universal_infected">
                 </div>
-                <div class="c-field c-field--inline u-mr-small">
+                <div class="c-field c-field--inline u-mr-small u-flex align-items-center flex-column">
                     <label class="c-field__label" for="input2">Recovered Population</label>
-                    <input class="c-input" type="text" placeholder="Recovered Population">
+                    <input class="c-input aUniversalInput u-text-center" type="text" placeholder="Recovered Population" data-name="universal_recovered">
                 </div>
 
-                <div class="c-field c-field--inline u-mr-small">
+                <div class="c-field c-field--inline u-mr-small u-flex align-items-center flex-column">
                     <label class="c-field__label" for="input2">Days</label>
-                    <input class="c-input" type="text" placeholder="Days ">
+                    <input class="c-input aUniversalInput u-text-center" type="text" placeholder="Days " data-name="universal_days">
                 </div>
 
                 {{#if simulateDynamicPopulation}}
-                  <div class="c-field c-field--inline u-mr-small">
+                  <div class="c-field c-field--inline u-mr-small u-flex align-items-center flex-column">
                       <label class="c-field__label" for="input2">Birth Rate</label>
-                      <input class="c-input" type="text" placeholder="Birth Rate ">
+                      <input class="c-input aUniversalInput u-text-center" type="text" placeholder="Birth Rate " data-name="universal_birth">
                   </div>
-                  <div class="c-field c-field--inline u-mr-small">
+                  <div class="c-field c-field--inline u-mr-small u-flex align-items-center flex-column">
                       <label class="c-field__label" for="input2">Death Rate</label>
-                      <input class="c-input" type="text" placeholder="Death Rate ">
+                      <input class="c-input aUniversalInput u-text-center" type="text" placeholder="Death Rate " data-name="universal_death">
                   </div>
                 {{/if}}
   </div>

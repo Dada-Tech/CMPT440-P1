@@ -13,9 +13,10 @@
                       <button class="c-btn c-btn--info float-right simulateMultipleResults" style="float: right !important;">Simulate Diseases</button>
                       {{/if}}
                   </caption>
-
+                  {{#if entries}}
                   <thead class="c-table__head c-table__head--slim">
                       <tr class="c-table__row">
+                        <th class="c-table__cell c-table__cell--head">#</th>
                         <th class="c-table__cell c-table__cell--head">Beta</th>
                         <th class="c-table__cell c-table__cell--head">Gamma</th>
                         <th class="c-table__cell c-table__cell--head">Infected Pop.</th>
@@ -28,41 +29,49 @@
                         <th class="c-table__cell c-table__cell--head">
                             <span class="">Days</span>
                         </th>
+                        <th class="c-table__cell c-table__cell--head">Delete</th>
                       </tr>
                   </thead>
 
                   <tbody>
                     {{#each entries}}
                       <tr class="c-table__row">
-
                           <td class="c-table__cell">
-                              <input class="c-input" type="text" id="input1" placeholder="0.0">
+                              <span class="">{{@index}}</span>
+                          </td>
+                          <td class="c-table__cell">
+                              <input class="c-input" type="text" id="input1" placeholder="0.0" value="{{beta}}" data-rowid="{{random_id}}" data-name="beta">
                           </td>
 
                           <td class="c-table__cell">
-                              <input class="c-input" type="text" id="input1" placeholder="0.0">
+                              <input class="c-input" type="text" id="input1" placeholder="0.0" value="{{gamma}}" data-rowid="{{random_id}}" data-name="gamma">
                           </td>
                           <td class="c-table__cell">
-                              <input class="c-input" type="text" id="input1" placeholder="0.0">
+                              <input class="c-input" type="text" id="input1" placeholder="0.0" value="{{susceptible}}" data-rowid="{{random_id}}" data-name="susceptible">
                           </td>
                           <td class="c-table__cell">
-                              <input class="c-input" type="text" id="input1" placeholder="0.0">
+                              <input class="c-input" type="text" id="input1" placeholder="0.0" value="{{infected}}" data-rowid="{{random_id}}" data-name="infected">
                           </td>
                           <td class="c-table__cell">
-                              <input class="c-input" type="text" id="input1" placeholder="0.0">
+                              <input class="c-input" type="text" id="input1" placeholder="0.0" value="{{recovered}}" data-rowid="{{random_id}}" data-name="recovered">
+                          </td>
+                          <td class="c-table__cell">
+                              <input class="c-input" type="text" id="input1" placeholder="0.0" value="{{days}}" data-rowid="{{random_id}}" data-name="days">
                           </td>
                           {{#if simulateDynamicPopulation}}
                           <td class="c-table__cell">
-                              <input class="c-input" type="text" id="input1" placeholder="0.0">
+                              <input class="c-input" type="text" id="input1" placeholder="0.0" value="{{birth}}" data-rowid="{{random_id}}" data-name="birth">
                           </td>
+
                           <td class="c-table__cell">
-                              <input class="c-input" type="text" id="input1" placeholder="0.0">
+                              <input class="c-input" type="text" id="input1" placeholder="0.0" value="{{death}}" data-rowid="{{random_id}}" data-name="death">
                           </td>
                           {{/if}}
                           <td class="c-table__cell">
-                              <input class="c-input" type="text" id="input1" placeholder="0.0">
+                            <button class="c-btn c-btn--danger float-right u-ml-small removeInput" style="float: right !important;"  data-rowid="{{random_id}}">-</button>
                           </td>
                       </tr>
+
                       {{/each}}
 
 
@@ -73,6 +82,17 @@
 
 
                   </tbody>
+                  {{else}}
+                      <div class="c-card u-p-medium u-text-center u-mb-medium" data-mh="landing-cards" style="">
+
+                        <img class="u-mb-small" src="/img/simulation.svg" alt="Doctor icon" width="400px">
+
+                        <h4 class="u-h6 u-mt-medium">
+                            You have no input parameters to simulate. <br/> When you add them they will show up here!
+                        </h4>
+                        <a class="c-btn c-btn--info u-mt-medium addInput" href="#">Start adding</a>
+                    </div>
+                    {{/if}}
               </table>
           </div>
       </div>
