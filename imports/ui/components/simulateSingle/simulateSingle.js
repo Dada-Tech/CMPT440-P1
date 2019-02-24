@@ -42,7 +42,8 @@ Template.simulateSingle.helpers({
 
 Template.simulateSingle.events({
     'click .simulate'(event, instance) {
-
+      event.preventDefault();
+      event.stopPropagation();
       var beta_parameter = $(".inputBeta").val();
       instance.beta.set(beta_parameter);
 
