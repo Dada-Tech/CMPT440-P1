@@ -46,9 +46,12 @@ Template.Home.events({
       var el = $('.simulateMultipleCheckbox');
       if (el.is(':checked') == true){
         appVariableScope.simulateMultiple.set(true);
+
       }
       else{
         appVariableScope.simulateMultiple.set(false);
+        appVariableScope.universalParameters.set(false);
+
       }
       setTimeout(function(){
         var $switch = $('.universalParametersSwitch');
@@ -129,6 +132,7 @@ var event_instance = instance;
 var el = $('.simulateDynamicPopulationCheckbox');
 if (el.is(':checked') == true){
   appVariableScope.simulateDynamicPopulation.set(true);
+
 }
 else{
   appVariableScope.simulateDynamicPopulation.set(false);
