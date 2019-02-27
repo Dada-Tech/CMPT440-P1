@@ -23,50 +23,50 @@
                   <h1 class="u-h3 u-text-center u-mb-zero">Input disease parameters</h1>
               </header> -->
 
-              <form class="c-card__body">
+              <form class="c-card__body" data-parsley-validate="">
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input1">Beta</label>
-                      <input class="c-input inputBeta" type="text" id="input1" placeholder="0.0">
+                      <input class="c-input inputBeta" type="text" id="input1" placeholder="0.0" required="">
                   </div>
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input2">Gamma</label>
-                      <input class="c-input inputGamma" type="text" id="input2" placeholder="0.0">
+                      <input class="c-input inputGamma" type="text" id="input2" placeholder="0.0" required="">
                   </div>
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input3">Susceptible Population</label>
-                      <input class="c-input inputSusceptible" type="text" id="input3" placeholder="1000">
+                      <input class="c-input inputSusceptible" type="text" id="input3" placeholder="1000" required="">
                   </div>
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input3">Infected Population</label>
-                      <input class="c-input inputInfected" type="text" id="input3" placeholder="200">
+                      <input class="c-input inputInfected" type="text" id="input3" placeholder="200" required="">
                   </div>
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input3">Recovered Population</label>
-                      <input class="c-input inputRecovered" type="text" id="input3" placeholder="800">
+                      <input class="c-input inputRecovered" type="text" id="input3" placeholder="800" required="">
                   </div>
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input3">Days</label>
-                      <input class="c-input inputDays" type="text" id="input3" placeholder="Days">
+                      <input class="c-input inputDays" type="text" id="input3" placeholder="Days" required="">
                   </div>
 
                   {{#if simulateDynamicPopulation}}
                     <div class="c-field u-mb-small">
                         <label class="c-field__label" for="input3">Birth Rate</label>
-                        <input class="c-input inputBirth" type="text" id="input3" placeholder="0">
+                        <input class="c-input inputBirth" type="text" id="input3" placeholder="0" required="">
                     </div>
 
                     <div class="c-field u-mb-small">
                         <label class="c-field__label" for="input3">Death Rate</label>
-                        <input class="c-input inputDeath" type="text" id="input3" placeholder="0">
+                        <input class="c-input inputDeath" type="text" id="input3" placeholder="0" required="">
                     </div>
                   {{/if}}
 
-                  <button class="c-btn c-btn--info c-btn--fullwidth simulate">Submit</button>
+                  <button class="c-btn c-btn--info c-btn--fullwidth simulate" value="validate">Submit</button>
               </form>
           </div>
           </div>

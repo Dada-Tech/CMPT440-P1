@@ -3,14 +3,15 @@
     <div class="row">
     <div class="col-xl-12">
       <div class="c-table-responsive@desktop">
+        <form class="c-card__body multipleInputForm" data-parsley-validate="" >
               <table class="c-table c-table--highlight u-mb-small">
 
                   <caption class="c-table__title">
                       Multiple Disease Simulation <small>Please enter all parameters necessary in the table below</small>
 
-                      <button class="c-btn c-btn--success float-right u-ml-small addInput" style="float: right !important;">+</button>
+                      <div class="c-btn c-btn--success float-right u-ml-small addInput" style="float: right !important;">+</div>
                       {{#if entries}}
-                      <button class="c-btn c-btn--info float-right simulateMultipleResults" style="float: right !important;">Simulate Diseases</button>
+                      <button class="c-btn c-btn--info float-right simulateMultipleResults" value="validate" style="float: right !important;" >Simulate Diseases</button>
                       {{/if}}
                   </caption>
                   {{#if entries}}
@@ -34,13 +35,14 @@
                   </thead>
 
                   <tbody>
+
                     {{#each entries}}
                       <tr class="c-table__row">
                           <td class="c-table__cell">
                               <span class="">{{@index}}</span>
                           </td>
                           <td class="c-table__cell">
-                              <input class="c-input" type="text" id="input1" placeholder="0.0" value="{{beta}}" data-rowid="{{random_id}}" data-name="beta">
+                              <input class="c-input" type="text" id="input1" placeholder="0.0" value="{{beta}}" data-rowid="{{random_id}}" data-name="beta" required="">
                           </td>
 
                           <td class="c-table__cell">
@@ -68,11 +70,12 @@
                           </td>
                           {{/if}}
                           <td class="c-table__cell">
-                            <button class="c-btn c-btn--danger float-right u-ml-small removeInput" style="float: right !important;"  data-rowid="{{random_id}}">-</button>
+                            <div class="c-btn c-btn--danger float-right u-ml-small removeInput" style="float: right !important;"  data-rowid="{{random_id}}">-</div>
                           </td>
                       </tr>
 
                       {{/each}}
+
 
 
 
@@ -94,6 +97,7 @@
                     </div>
                     {{/if}}
               </table>
+                </form>
           </div>
       </div>
       </div>

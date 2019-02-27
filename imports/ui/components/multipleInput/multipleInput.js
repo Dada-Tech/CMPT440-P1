@@ -46,7 +46,16 @@ Template.multipleInput.events({
       mulipleInputs.find(x => x.random_id === row_id)[variable_name] = $(event.currentTarget).val();
     }, 500);
 
-}
+},
+'click .simulateMultipleResults'(event, instance) {
+  event.preventDefault();
+  event.stopPropagation();
+  // check if form is valid
+  appVariableScope.simulateMultipleResults.set(true);
+
+
+
+},
 });
 
 Template.multipleInput.onCreated(function() {

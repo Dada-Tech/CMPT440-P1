@@ -140,14 +140,7 @@ else{
 
 
 },
-'click .simulateMultipleResults '(event, instance) {
-  event.preventDefault();
-  event.stopPropagation();
-  appVariableScope.simulateMultipleResults.set(true);
 
-
-
-},
 'click .simulateMultipleEdit'(event, instance) {
   event.preventDefault();
   event.stopPropagation();
@@ -170,6 +163,7 @@ Template.Home.onCreated(function() {
 
 Template.Home.onRendered(function() {
     Meteor.Loader.loadJs("/js/main.js");
+    Meteor.Loader.loadJs("/js/parsley.js");
 
 
     var $switch = $('.c-switch');
