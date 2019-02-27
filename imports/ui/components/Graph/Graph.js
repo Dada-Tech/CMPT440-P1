@@ -1,6 +1,10 @@
 import { Template } from 'meteor/templating'
 import { Meteor } from 'meteor/meteor'
 import * as math from 'mathjs'
+var Calculess = require('calculess');
+var Calc = Calculess.prototype;
+// var Calculess = require('calculess');
+
 
 Template.Graph.helpers({
   modelName () {
@@ -42,7 +46,7 @@ Template.Graph.onCreated(function() {
   if (instance.birth_rate.get() == 0 && instance.death_rate.get() == 0)
   {
     instance.modelName.set("SIR");
-    // instance.susceptible_derivative = new ReactiveVar(-(instance.beta.get()) * instance.susceptible_population.get() * instance.infected_population.get() / instance.total_population.());
+    instance.susceptible_derivative = new ReactiveVar(-(instance.beta.get()) * instance.susceptible_population.get() * instance.infected_population.get() / instance.total_population.get());
     // instance.infected_derivative = new ReactiveVar('beta * susceptible_population * infected_population / total_population - gamma * infected_population', 'infected_population');
     // instance.recovered_derivative = new ReactiveVar('gamma * infected_population', 'recovered_population');
 
@@ -58,7 +62,12 @@ Template.Graph.onCreated(function() {
 
 
 
-
+  Meteor.call('callScript', function(err, result) {
+    if (err) {
+      console.warn("Error : ", err)
+    }
+    console.log(result);
+  });
 
 
 
@@ -71,12 +80,46 @@ Template.Graph.onRendered(function() {
   console.log(template_instance.days.get());
   // template_instance.susceptible_derivative.get();
   setTimeout(function(){
+    function sin(x) {
+        return Math.sin(x);
+        // return template_instance.susceptible_derivative.get();
+    }
+
+    var B, k, initInf, initPop, ds, dr, di, sus, inf, rec, timeStep, time;
 
 
-    const xValues = math.range(0, template_instance.days.get(), 5).toArray();
+    B = 0.0005;
+    k = 0.1;
+
+    sus = 1000;
+    inf = 10;
+    rec = 0;
+    const xValues = math.range(0, template_instance.days.get(), 1).toArray();
+
     const yValues = xValues.map(function (x) {
-      // return math.derivative(template_instance.susceptible_derivative.get(), 'x').eval({x: x});
-      return x*2;
+      ds = -B * sus * inf;
+      di = (B * sus * inf - k * inf);
+      dr = k * inf;
+      sus += ds;
+      inf += di;
+      rec += dr;
+      return sus;
+      //i.push([t, inf + di]);
+      //r.push([t, rec + dr]);
+
+      //sus += ds;
+      //inf += di;
+      //rec += dr;
+
+      // console.log(math.derivative(template_instance.susceptible_derivative.get(), 'x').eval({x: x}));
+      // console.log(math.eval('integrate(x^0.5, x, 0, 1)'));
+
+
+     // 2.0082484079079745
+     // console.log(Calc.integral(0, x, sin, 0.1));
+     // return Calc.integral(0, x, sin, 0.1);
+      // return ;
+      // return x*2;
     })
 
     console.log(xValues);
