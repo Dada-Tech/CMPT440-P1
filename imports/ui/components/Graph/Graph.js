@@ -1,8 +1,8 @@
 import { Template } from 'meteor/templating'
 import { Meteor } from 'meteor/meteor'
 import * as math from 'mathjs'
-var Calculess = require('calculess');
-var Calc = Calculess.prototype;
+// var Calculess = require('calculess');
+// var Calc = Calculess.prototype;
 // var Calculess = require('calculess');
 
 
@@ -41,24 +41,24 @@ Template.Graph.onCreated(function() {
 
   instance.modelName.set("SIR");
 
-  //checking to see if we need to use SIRS model
-  //if birth and death rate = 0, not a dynamic population
-  if (instance.birth_rate.get() == 0 && instance.death_rate.get() == 0)
-  {
-    instance.modelName.set("SIR");
-    instance.susceptible_derivative = new ReactiveVar(-(instance.beta.get()) * instance.susceptible_population.get() * instance.infected_population.get() / instance.total_population.get());
-    // instance.infected_derivative = new ReactiveVar('beta * susceptible_population * infected_population / total_population - gamma * infected_population', 'infected_population');
-    // instance.recovered_derivative = new ReactiveVar('gamma * infected_population', 'recovered_population');
+  // //checking to see if we need to use SIRS model
+  // //if birth and death rate = 0, not a dynamic population
+  // if (instance.birth_rate.get() == 0 && instance.death_rate.get() == 0)
+  // {
+  //   instance.modelName.set("SIR");
+  //   instance.susceptible_derivative = new ReactiveVar(-(instance.beta.get()) * instance.susceptible_population.get() * instance.infected_population.get() / instance.total_population.get());
+  //   // instance.infected_derivative = new ReactiveVar('beta * susceptible_population * infected_population / total_population - gamma * infected_population', 'infected_population');
+  //   // instance.recovered_derivative = new ReactiveVar('gamma * infected_population', 'recovered_population');
 
-  } else //if birth and death rate > 0 then this uses a dynamic population, therefore we must include death and birth rate as variabeles
-  {
-    instance.modelName.set("SIR With Dynamics");
-    // instance.susceptible_derivative = new ReactiveVar('(birth_rate * total_population) - (beta * susceptible_population * infected_population) - (death_rate * susceptible_population)', 'susceptible_population');
-    // instance.infected_derivative = new ReactiveVar('(beta * susceptible_population * infected_population / total_population) - (gamma * infected_population) - (death_rate * infected_population)', 'infected_population');
-    // instance.recovered_derivative = new ReactiveVar('(gamma * infected_population) - (death_rate * recovered_population)', 'recovered_population');
+  // } else //if birth and death rate > 0 then this uses a dynamic population, therefore we must include death and birth rate as variabeles
+  // {
+  //   instance.modelName.set("SIR With Dynamics");
+  //   // instance.susceptible_derivative = new ReactiveVar('(birth_rate * total_population) - (beta * susceptible_population * infected_population) - (death_rate * susceptible_population)', 'susceptible_population');
+  //   // instance.infected_derivative = new ReactiveVar('(beta * susceptible_population * infected_population / total_population) - (gamma * infected_population) - (death_rate * infected_population)', 'infected_population');
+  //   // instance.recovered_derivative = new ReactiveVar('(gamma * infected_population) - (death_rate * recovered_population)', 'recovered_population');
 
 
-  }
+  // }
 
 
 
@@ -87,53 +87,83 @@ Template.Graph.onRendered(function() {
 
     var B, k, initInf, initPop, ds, dr, di, sus, inf, rec, timeStep, time;
 
+    B = 1;
+    k = 0.5;
 
-    B = 0.0005;
-    k = 0.1;
-
-    sus = 1000;
-    inf = 10;
+    sus = 100;
+    inf = 1;
     rec = 0;
+    pop = sus + inf + rec;
     const xValues = math.range(0, template_instance.days.get(), 1).toArray();
-
+    
+    // calculating ds
     const yValues = xValues.map(function (x) {
-      ds = -B * sus * inf;
-      di = (B * sus * inf - k * inf);
-      dr = k * inf;
+      ds = -B * (sus * inf / pop);
       sus += ds;
+      di = (B * (sus * inf / pop) - (k * inf));
       inf += di;
+      dr = k * inf;
       rec += dr;
       return sus;
-      //i.push([t, inf + di]);
-      //r.push([t, rec + dr]);
-
-      //sus += ds;
-      //inf += di;
-      //rec += dr;
-
-      // console.log(math.derivative(template_instance.susceptible_derivative.get(), 'x').eval({x: x}));
-      // console.log(math.eval('integrate(x^0.5, x, 0, 1)'));
-
-
-     // 2.0082484079079745
-     // console.log(Calc.integral(0, x, sin, 0.1));
-     // return Calc.integral(0, x, sin, 0.1);
-      // return ;
-      // return x*2;
     })
 
-    console.log(xValues);
-    console.log(yValues);
+    //have to reassign SIR for our model to work
+    sus = 100;
+    inf = 1;
+    rec = 0;
+    // calculating di
+    const yValuesI = xValues.map(function (x) {
+      ds = -B * (sus * inf / pop);
+      sus += ds;
+      di = (B * (sus * inf / pop) - (k * inf));
+      inf += di;
+      dr = k * inf;
+      rec += dr;
+      return inf;
+    })
 
+    sus = 100;
+    inf = 1;
+    rec = 0;
+    // calculating dr
+    const yValuesR = xValues.map(function (x) {
+      ds = -B * (sus * inf / pop);
+      sus += ds;
+      di = (B * (sus * inf / pop) - (k * inf));
+      inf += di;
+      dr = k * inf;
+      rec += dr;
+      return rec;
+    })
+
+    // console.log(xValues);
+    // console.log(yValues);
+
+    // drawing the trace lines on the graph for the susceptible, infected and recovered 
     var trace = {
       x: xValues,
       y: yValues,
-      mode: 'line'
+      mode: 'line',
+      name: 'Susceptible'
     };
-    var data = [trace];
+    var trace2 = {
+      x: xValues,
+      y: yValuesI,
+      mode: 'line',
+      name: 'Infected'
+    };
+    var trace3 = {
+      x: xValues,
+      y: yValuesR,
+      mode: 'line',
+      name: 'Recovered'
+    };
+  
+    var data = [trace, trace2, trace3];
 
     var chart_id = "chart-" + template_instance.random_id.get();
     Plotly.newPlot(chart_id, data);
+    // Plotly.addTraces(chart_id, {y: [2,1,2]});
 
 }, 1000);
 });
