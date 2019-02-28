@@ -27,40 +27,19 @@ Template.Graph.onCreated(function() {
   var instance;
   instance = this;
   // alert("Hi");
-  instance.susceptible_population = new ReactiveVar(3);
-  instance.infected_population = new ReactiveVar(4);
-  instance.recovered_population = new ReactiveVar(5);
+  instance.susceptible_population = new ReactiveVar(100);
+  instance.infected_population = new ReactiveVar(1);
+  instance.recovered_population = new ReactiveVar(0);
   instance.total_population = new ReactiveVar(instance.susceptible_population.get() + instance.infected_population.get() + instance.recovered_population.get());
-  instance.beta = new ReactiveVar(5);
-  instance.gamma = new ReactiveVar(6);
-  instance.birth_rate = new ReactiveVar(0);
-  instance.death_rate = new ReactiveVar(0);
-  instance.days = new ReactiveVar(100);
+  instance.beta = new ReactiveVar(1.0);
+  instance.gamma = new ReactiveVar(0.5);
+  instance.birth_rate = new ReactiveVar(0.5);
+  instance.death_rate = new ReactiveVar(0.7);
+  instance.days = new ReactiveVar(50);
   instance.modelName = new ReactiveVar("SIRS");
   instance.random_id = new ReactiveVar(Math.random().toString(36).slice(2));
 
   instance.modelName.set("SIR");
-
-  // //checking to see if we need to use SIRS model
-  // //if birth and death rate = 0, not a dynamic population
-  // if (instance.birth_rate.get() == 0 && instance.death_rate.get() == 0)
-  // {
-  //   instance.modelName.set("SIR");
-  //   instance.susceptible_derivative = new ReactiveVar(-(instance.beta.get()) * instance.susceptible_population.get() * instance.infected_population.get() / instance.total_population.get());
-  //   // instance.infected_derivative = new ReactiveVar('beta * susceptible_population * infected_population / total_population - gamma * infected_population', 'infected_population');
-  //   // instance.recovered_derivative = new ReactiveVar('gamma * infected_population', 'recovered_population');
-
-  // } else //if birth and death rate > 0 then this uses a dynamic population, therefore we must include death and birth rate as variabeles
-  // {
-  //   instance.modelName.set("SIR With Dynamics");
-  //   // instance.susceptible_derivative = new ReactiveVar('(birth_rate * total_population) - (beta * susceptible_population * infected_population) - (death_rate * susceptible_population)', 'susceptible_population');
-  //   // instance.infected_derivative = new ReactiveVar('(beta * susceptible_population * infected_population / total_population) - (gamma * infected_population) - (death_rate * infected_population)', 'infected_population');
-  //   // instance.recovered_derivative = new ReactiveVar('(gamma * infected_population) - (death_rate * recovered_population)', 'recovered_population');
-
-
-  // }
-
-
 
   Meteor.call('callScript', function(err, result) {
     if (err) {
@@ -87,6 +66,12 @@ Template.Graph.onRendered(function() {
 
     var B, k, initInf, initPop, ds, dr, di, sus, inf, rec, timeStep, time;
 
+    var bRate, dRate;
+
+    var if_dynamic = document.getElementById("switch3").checked;
+
+    //console.log(if_dynamic);
+
     B = 1;
     k = 0.5;
 
@@ -94,47 +79,147 @@ Template.Graph.onRendered(function() {
     inf = 1;
     rec = 0;
     pop = sus + inf + rec;
-    const xValues = math.range(0, template_instance.days.get(), 1).toArray();
+
+    bRate = template_instance.birth_rate.get();
+    dRate = template_instance.death_rate.get();
+
+    // B = template_instance.beta.get();
+    // k = template_instance.gamma.get();
+
+    // sus = template_instance.susceptible_population.get();
+    // inf = template_instance.infected_population.get();
+    // rec = template_instance.recovered_population.get();
+    // pop = sus + inf + rec;
+     const xValues = math.range(0, template_instance.days.get(), 1).toArray();
     
-    // calculating ds
-    const yValues = xValues.map(function (x) {
-      ds = -B * (sus * inf / pop);
-      sus += ds;
-      di = (B * (sus * inf / pop) - (k * inf));
-      inf += di;
-      dr = k * inf;
-      rec += dr;
+    //      // calculating ds
+    // const yValues = xValues.map(function (x) {
+    //   ds = -B * (sus * inf / pop);
+    //   sus += ds;
+    //   di = (B * (sus * inf / pop) - (k * inf));
+    //   inf += di;
+    //   dr = k * inf;
+    //   rec += dr;
+    //   return sus;
+    // })
+
+    // // calculating di
+    // // have to reassign SIR for our model to work
+    // sus = 100;
+    // inf = 1;
+    // rec = 0;
+    // const yValuesI = xValues.map(function (x) {
+    //   ds = -B * (sus * inf / pop);
+    //   sus += ds;
+    //   di = (B * (sus * inf / pop) - (k * inf));
+    //   inf += di;
+    //   dr = k * inf;
+    //   rec += dr;
+    //   return inf;
+    // })
+
+
+    // // calculating dr
+    // sus = 100;
+    // inf = 1;
+    // rec = 0;
+    // const yValuesR = xValues.map(function (x) {
+    //   ds = -B * (sus * inf / pop);
+    //   sus += ds;
+    //   di = (B * (sus * inf / pop) - (k * inf));
+    //   inf += di;
+    //   dr = k * inf;
+    //   rec += dr;
+    //   return rec;
+    // })
+
+
+// Trying to check to see if checkbox for dynamic population is checked
+// if it is checked, we add in the birth and death rate
+// currently not working, but almost there
+
+const yValues = xValues.map(function (x) {
+
+      if (if_dynamic == true)
+      {
+        template_instance.modelName.set("SIR w/Dynamics")
+        ds = (bRate * pop) - ((B * sus * inf) / pop) - (dRate * sus);
+        sus += ds;
+        di = ((B * sus * inf) / pop) - (k * inf) - (dRate * inf);
+        inf += di;
+        dr = (k * inf) - (dRate * rec);
+        rec += dr;
+        //return sus;
+      } else {
+        ds = -B * (sus * inf / pop);
+        sus += ds;
+        di = (B * (sus * inf / pop) - (k * inf));
+        inf += di;
+        dr = k * inf;
+        rec += dr;
+        //return sus;
+      }
       return sus;
+      
     })
 
-    //have to reassign SIR for our model to work
-    sus = 100;
-    inf = 1;
-    rec = 0;
     // calculating di
+    // have to reassign SIR for our model to work
+    sus = 100;
+    inf = 5;
+    rec = 0;
     const yValuesI = xValues.map(function (x) {
-      ds = -B * (sus * inf / pop);
-      sus += ds;
-      di = (B * (sus * inf / pop) - (k * inf));
-      inf += di;
-      dr = k * inf;
-      rec += dr;
+        
+      if (if_dynamic == true)
+      {
+        template_instance.modelName.set("SIR w/Dynamics")
+        ds = (bRate * pop) - ((B * sus * inf) / pop) - (dRate * sus);
+        sus += ds;
+        di = ((B * sus * inf) / pop) - (k * inf) - (dRate * inf);
+        inf += di;
+        dr = (k * inf) - (dRate * rec);
+        rec += dr;
+        //return inf;
+      } else {
+        ds = -B * (sus * inf / pop);
+        sus += ds;
+        di = (B * (sus * inf / pop) - (k * inf));
+        inf += di;
+        dr = k * inf;
+        rec += dr;
+        //return inf;
+      }
       return inf;
     })
 
+
+    // calculating dr
     sus = 100;
     inf = 1;
     rec = 0;
-    // calculating dr
     const yValuesR = xValues.map(function (x) {
-      ds = -B * (sus * inf / pop);
-      sus += ds;
-      di = (B * (sus * inf / pop) - (k * inf));
-      inf += di;
-      dr = k * inf;
-      rec += dr;
+      if (if_dynamic == true)
+      {
+        template_instance.modelName.set("SIR w/Dynamics")
+        ds = (bRate * pop) - ((B * sus * inf) / pop) - (dRate * sus);
+        sus += ds;
+        di = ((B * sus * inf) / pop) - (k * inf) - (dRate * inf);
+        inf += di;
+        dr = (k * inf) - (dRate * rec);
+        rec += dr;
+        //return rec;
+      } else {
+        ds = -B * (sus * inf / pop);
+        sus += ds;
+        di = (B * (sus * inf / pop) - (k * inf));
+        inf += di;
+        dr = k * inf;
+        rec += dr;
+        //return rec;
+      }
       return rec;
     })
+  
 
     // console.log(xValues);
     // console.log(yValues);
@@ -161,8 +246,22 @@ Template.Graph.onRendered(function() {
   
     var data = [trace, trace2, trace3];
 
+    // adding x and y axis titles
+    var layout = {
+      xaxis: {
+        title: {
+          text: 'Time(days)'
+        },
+      },
+      yaxis: {
+        title: {
+          text: 'Population'
+        }
+      }
+    };
+
     var chart_id = "chart-" + template_instance.random_id.get();
-    Plotly.newPlot(chart_id, data);
+    Plotly.newPlot(chart_id, data, layout);
     // Plotly.addTraces(chart_id, {y: [2,1,2]});
 
 }, 1000);
