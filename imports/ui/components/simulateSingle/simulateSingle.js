@@ -65,16 +65,12 @@ Template.simulateSingle.events({
       instance.days.set(days_parameter);
 
       var birth_rate = $(".inputBirth").val();
-      instance.days.set(birth_rate);
+      instance.birth.set(birth_rate);
 
       var death_rate = $(".inputDeath").val();
-      instance.days.set(death_rate);
+      instance.death.set(death_rate);
 
-      var validation = $('#singleSimulationForm').parsley().validate();
-  		if(validation == true){
-        instance.render_graph.set(true);
-      }
-
+      
 
     }
 });
