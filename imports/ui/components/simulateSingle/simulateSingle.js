@@ -44,6 +44,7 @@ Template.simulateSingle.events({
     'click .simulate'(event, instance) {
       // event.preventDefault();
       // event.stopPropagation();
+
       var beta_parameter = $(".inputBeta").val();
       instance.beta.set(beta_parameter);
 
@@ -69,7 +70,11 @@ Template.simulateSingle.events({
       var death_rate = $(".inputDeath").val();
       instance.days.set(death_rate);
 
-      instance.render_graph.set(true);
+      var validation = $('#singleSimulationForm').parsley().validate();
+  		if(validation == true){
+        instance.render_graph.set(true);
+      }
+
 
     }
 });

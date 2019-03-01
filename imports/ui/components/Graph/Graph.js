@@ -72,66 +72,26 @@ Template.Graph.onRendered(function() {
 
     //console.log(if_dynamic);
 
-    B = 1;
-    k = 0.5;
-
-    sus = 100;
-    inf = 1;
-    rec = 0;
-    pop = sus + inf + rec;
+    // B = 1;
+    // k = 0.5;
+    //
+    // sus = 100;
+    // inf = 1;
+    // rec = 0;
+    // pop = sus + inf + rec;
 
     bRate = template_instance.birth_rate.get();
     dRate = template_instance.death_rate.get();
 
-    // B = template_instance.beta.get();
-    // k = template_instance.gamma.get();
+    B = template_instance.beta.get();
+    k = template_instance.gamma.get();
 
-    // sus = template_instance.susceptible_population.get();
-    // inf = template_instance.infected_population.get();
-    // rec = template_instance.recovered_population.get();
-    // pop = sus + inf + rec;
+    sus = template_instance.susceptible_population.get();
+    inf = template_instance.infected_population.get();
+    rec = template_instance.recovered_population.get();
+    pop = sus + inf + rec;
      const xValues = math.range(0, template_instance.days.get(), 1).toArray();
-    
-    //      // calculating ds
-    // const yValues = xValues.map(function (x) {
-    //   ds = -B * (sus * inf / pop);
-    //   sus += ds;
-    //   di = (B * (sus * inf / pop) - (k * inf));
-    //   inf += di;
-    //   dr = k * inf;
-    //   rec += dr;
-    //   return sus;
-    // })
 
-    // // calculating di
-    // // have to reassign SIR for our model to work
-    // sus = 100;
-    // inf = 1;
-    // rec = 0;
-    // const yValuesI = xValues.map(function (x) {
-    //   ds = -B * (sus * inf / pop);
-    //   sus += ds;
-    //   di = (B * (sus * inf / pop) - (k * inf));
-    //   inf += di;
-    //   dr = k * inf;
-    //   rec += dr;
-    //   return inf;
-    // })
-
-
-    // // calculating dr
-    // sus = 100;
-    // inf = 1;
-    // rec = 0;
-    // const yValuesR = xValues.map(function (x) {
-    //   ds = -B * (sus * inf / pop);
-    //   sus += ds;
-    //   di = (B * (sus * inf / pop) - (k * inf));
-    //   inf += di;
-    //   dr = k * inf;
-    //   rec += dr;
-    //   return rec;
-    // })
 
 
 // Trying to check to see if checkbox for dynamic population is checked
@@ -160,7 +120,7 @@ const yValues = xValues.map(function (x) {
         //return sus;
       }
       return sus;
-      
+
     })
 
     // calculating di
@@ -169,7 +129,7 @@ const yValues = xValues.map(function (x) {
     inf = 5;
     rec = 0;
     const yValuesI = xValues.map(function (x) {
-        
+
       if (if_dynamic == true)
       {
         template_instance.modelName.set("SIR w/Dynamics")
@@ -219,12 +179,12 @@ const yValues = xValues.map(function (x) {
       }
       return rec;
     })
-  
+
 
     // console.log(xValues);
     // console.log(yValues);
 
-    // drawing the trace lines on the graph for the susceptible, infected and recovered 
+    // drawing the trace lines on the graph for the susceptible, infected and recovered
     var trace = {
       x: xValues,
       y: yValues,
@@ -243,7 +203,7 @@ const yValues = xValues.map(function (x) {
       mode: 'line',
       name: 'Recovered'
     };
-  
+
     var data = [trace, trace2, trace3];
 
     // adding x and y axis titles
