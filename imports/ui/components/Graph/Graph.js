@@ -26,16 +26,17 @@ Template.Graph.onCreated(function() {
   // Meteor.Loader.loadJs("/js/math.js");
   var instance;
   instance = this;
+  var context_data = this.data;
   // alert("Hi");
-  instance.susceptible_population = new ReactiveVar(100);
-  instance.infected_population = new ReactiveVar(1);
-  instance.recovered_population = new ReactiveVar(0);
+  instance.susceptible_population = new ReactiveVar(context_data.s);
+  instance.infected_population = new ReactiveVar(context_data.i);
+  instance.recovered_population = new ReactiveVar(context_data.r);
   instance.total_population = new ReactiveVar(instance.susceptible_population.get() + instance.infected_population.get() + instance.recovered_population.get());
-  instance.beta = new ReactiveVar(1.0);
-  instance.gamma = new ReactiveVar(0.5);
-  instance.birth_rate = new ReactiveVar(0.5);
-  instance.death_rate = new ReactiveVar(0.7);
-  instance.days = new ReactiveVar(50);
+  instance.beta = new ReactiveVar(context_data.beta);
+  instance.gamma = new ReactiveVar(context_data.gamma);
+  instance.birth_rate = new ReactiveVar(context_data.birth);
+  instance.death_rate = new ReactiveVar(context_data.death);
+  instance.days = new ReactiveVar(context_data.days);
   instance.modelName = new ReactiveVar("SIRS");
   instance.random_id = new ReactiveVar(Math.random().toString(36).slice(2));
 
@@ -86,11 +87,20 @@ Template.Graph.onRendered(function() {
     B = template_instance.beta.get();
     k = template_instance.gamma.get();
 
-    sus = template_instance.susceptible_population.get();
-    inf = template_instance.infected_population.get();
-    rec = template_instance.recovered_population.get();
-    pop = sus + inf + rec;
-     const xValues = math.range(0, template_instance.days.get(), 1).toArray();
+    sus1 = template_instance.susceptible_population.get();
+    sus2 = template_instance.susceptible_population.get();
+    sus3 = template_instance.susceptible_population.get();
+
+    inf1 = template_instance.infected_population.get();
+    inf2 = template_instance.infected_population.get();
+    inf3 = template_instance.infected_population.get();
+
+    rec1 = template_instance.recovered_population.get();
+    rec2 = template_instance.recovered_population.get();
+    rec3 = template_instance.recovered_population.get();
+
+    pop = sus1 + inf1 + rec1;
+    const xValues = math.range(0, template_instance.days.get(), 1).toArray();
 
 
 
@@ -103,81 +113,81 @@ const yValues = xValues.map(function (x) {
       if (if_dynamic == true)
       {
         template_instance.modelName.set("SIR w/Dynamics")
-        ds = (bRate * pop) - ((B * sus * inf) / pop) - (dRate * sus);
-        sus += ds;
-        di = ((B * sus * inf) / pop) - (k * inf) - (dRate * inf);
-        inf += di;
-        dr = (k * inf) - (dRate * rec);
-        rec += dr;
+        ds = (bRate * pop) - ((B * sus1 * inf1) / pop) - (dRate * sus1);
+        sus1 += ds;
+        di = ((B * sus1 * inf1) / pop) - (k * inf1) - (dRate * inf1);
+        inf1 += di;
+        dr = (k * inf1) - (dRate * rec1);
+        rec1 += dr;
         //return sus;
       } else {
-        ds = -B * (sus * inf / pop);
-        sus += ds;
-        di = (B * (sus * inf / pop) - (k * inf));
-        inf += di;
-        dr = k * inf;
-        rec += dr;
+        ds = -B * (sus1 * inf1 / pop);
+        sus1 += ds;
+        di = (B * (sus1 * inf1 / pop) - (k * inf1));
+        inf1 += di;
+        dr = k * inf1;
+        rec1 += dr;
         //return sus;
       }
-      return sus;
+      return sus1;
 
     })
 
     // calculating di
     // have to reassign SIR for our model to work
-    sus = 100;
-    inf = 5;
-    rec = 0;
+    // sus = 100;
+    // inf = 5;
+    // rec = 0;
     const yValuesI = xValues.map(function (x) {
 
       if (if_dynamic == true)
       {
         template_instance.modelName.set("SIR w/Dynamics")
-        ds = (bRate * pop) - ((B * sus * inf) / pop) - (dRate * sus);
-        sus += ds;
-        di = ((B * sus * inf) / pop) - (k * inf) - (dRate * inf);
-        inf += di;
-        dr = (k * inf) - (dRate * rec);
-        rec += dr;
+        ds = (bRate * pop) - ((B * sus2 * inf2) / pop) - (dRate * sus2);
+        sus2 += ds;
+        di = ((B * sus2 * inf2) / pop) - (k * inf2) - (dRate * inf2);
+        inf2 += di;
+        dr = (k * inf2) - (dRate * rec2);
+        rec2 += dr;
         //return inf;
       } else {
-        ds = -B * (sus * inf / pop);
-        sus += ds;
-        di = (B * (sus * inf / pop) - (k * inf));
-        inf += di;
-        dr = k * inf;
-        rec += dr;
+        ds = -B * (sus2 * inf2 / pop);
+        sus2 += ds;
+        di = (B * (sus2 * inf2 / pop) - (k * inf2));
+        inf2 += di;
+        dr = k * inf2;
+        rec2 += dr;
         //return inf;
       }
-      return inf;
+      return inf2;
     })
 
 
     // calculating dr
-    sus = 100;
-    inf = 1;
-    rec = 0;
+    // sus = 100;
+    // inf = 1;
+    // rec = 0;
     const yValuesR = xValues.map(function (x) {
       if (if_dynamic == true)
       {
         template_instance.modelName.set("SIR w/Dynamics")
-        ds = (bRate * pop) - ((B * sus * inf) / pop) - (dRate * sus);
-        sus += ds;
-        di = ((B * sus * inf) / pop) - (k * inf) - (dRate * inf);
-        inf += di;
-        dr = (k * inf) - (dRate * rec);
-        rec += dr;
+        ds = (bRate * pop) - ((B * sus3 * inf3) / pop) - (dRate * sus3);
+        sus3 += ds;
+        di = ((B * sus3 * inf3) / pop) - (k * inf3) - (dRate * inf3);
+        inf3 += di;
+        dr = (k * inf3) - (dRate * rec3);
+        rec3 += dr;
         //return rec;
       } else {
-        ds = -B * (sus * inf / pop);
-        sus += ds;
-        di = (B * (sus * inf / pop) - (k * inf));
-        inf += di;
-        dr = k * inf;
-        rec += dr;
+        ds = -B * (sus3 * inf3 / pop);
+        sus3 += ds;
+        di = (B * (sus3 * inf3 / pop) - (k * inf3));
+        inf3 += di;
+        dr = k * inf3;
+        rec3 += dr;
         //return rec;
       }
-      return rec;
+      return rec3;
     })
 
 
