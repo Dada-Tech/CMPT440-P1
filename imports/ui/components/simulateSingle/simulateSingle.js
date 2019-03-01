@@ -45,6 +45,8 @@ Template.simulateSingle.events({
       event.preventDefault();
       event.stopPropagation();
 
+      instance.render_graph.set(false);
+
       var beta_parameter = $(".inputBeta").val();
       instance.beta.set(beta_parameter);
 
