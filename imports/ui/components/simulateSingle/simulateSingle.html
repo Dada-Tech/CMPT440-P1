@@ -1,5 +1,24 @@
 <template name="simulateSingle">
-  <div class="container  u-mt-medium">
+    <script src="jquery.js"></script>
+    <script src="parsley.min.js"></script>
+
+    <style>
+        input.parsley-error {
+            color: #B94A48;
+            background-color: #F2DEDE;
+            border: 1px solid #EED3D7;
+        }
+
+        input.parsley-success {
+            color: #468847;
+            background-color: #DFF0D8;
+            border: 1px solid #D6E9C6;
+        }
+
+
+    </style>
+
+    <div class="container  u-mt-medium">
       <div class="row">
           <div class="col-xl-8">
             {{#if render_graph}}
@@ -23,46 +42,48 @@
                   <h1 class="u-h3 u-text-center u-mb-zero">Input disease parameters</h1>
               </header> -->
 
+              <!-- replace with jquery css selector for class c-input-->
+
               <form class="c-card__body" data-parsley-validate="">
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input1">Beta</label>
-                      <input class="c-input inputBeta" type="text" id="input1" placeholder="0.0" required="">
+                      <input class="c-input inputBeta" type="text" id="input1" placeholder="1.0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
                   </div>
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input2">Gamma</label>
-                      <input class="c-input inputGamma" type="text" id="input2" placeholder="0.0" required="">
+                      <input class="c-input inputGamma" type="text" id="input2" placeholder="0.0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
                   </div>
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input3">Susceptible Population</label>
-                      <input class="c-input inputSusceptible" type="text" id="input3" placeholder="1000" required="">
+                      <input class="c-input inputSusceptible" type="text" id="input3" placeholder="1000" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='10' required="">
                   </div>
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input3">Infected Population</label>
-                      <input class="c-input inputInfected" type="text" id="input3" placeholder="200" required="">
+                      <input class="c-input inputInfected" type="text" id="input3" placeholder="200" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='1' required="">
                   </div>
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input3">Recovered Population</label>
-                      <input class="c-input inputRecovered" type="text" id="input3" placeholder="800" required="">
+                      <input class="c-input inputRecovered" type="text" id="input3" placeholder="800" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='0' required="">
                   </div>
 
                   <div class="c-field u-mb-small">
                       <label class="c-field__label" for="input3">Days</label>
-                      <input class="c-input inputDays" type="text" id="input3" placeholder="Days" required="">
+                      <input class="c-input inputDays" type="text" id="input3" placeholder="Days" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='100' required="">
                   </div>
 
                   {{#if simulateDynamicPopulation}}
                     <div class="c-field u-mb-small">
                         <label class="c-field__label" for="input3">Birth Rate</label>
-                        <input class="c-input inputBirth" type="text" id="input3" placeholder="0" required="">
+                        <input class="c-input inputBirth" type="text" id="input3" placeholder="0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
                     </div>
 
                     <div class="c-field u-mb-small">
                         <label class="c-field__label" for="input3">Death Rate</label>
-                        <input class="c-input inputDeath" type="text" id="input3" placeholder="0" required="">
+                        <input class="c-input inputDeath" type="text" id="input3" placeholder="0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
                     </div>
                   {{/if}}
 
