@@ -3,7 +3,7 @@
       <div class="row">
           <div class="col-xl-8">
             {{#if render_graph}}
-              {{> Template.dynamic template=Graph s=susceptible_population i=infected_population r=recovered_population beta=beta_parameter gamma=gamma_parameter birth=birth_rate death=death_rate days=days_parameter}}
+              {{> Graph s=susceptible_population i=infected_population r=recovered_population beta=beta_parameter gamma=gamma_parameter birth=birth_rate death=death_rate days=days_parameter}}
             {{else}}
               <div class="c-card u-p-medium u-text-center u-mb-medium" data-mh="landing-cards" style="">
 
