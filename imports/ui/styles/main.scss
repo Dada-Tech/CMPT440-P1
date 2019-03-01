@@ -13601,3 +13601,15 @@ textarea.c-input {
 .universalParametersSwitch.is-active::before {
     background-color: #f8cf5d;
 }
+
+input.parsley-error {
+    color: #B94A48;
+    background-color: #F2DEDE;
+    border: 1px solid #EED3D7;
+}
+
+input.parsley-success {
+    color: #468847;
+    background-color: #DFF0D8;
+    border: 1px solid #D6E9C6;
+}

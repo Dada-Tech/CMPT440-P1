@@ -42,8 +42,8 @@ Template.simulateSingle.helpers({
 
 Template.simulateSingle.events({
     'click .simulate'(event, instance) {
-      // event.preventDefault();
-      // event.stopPropagation();
+      event.preventDefault();
+      event.stopPropagation();
 
       var beta_parameter = $(".inputBeta").val();
       instance.beta.set(beta_parameter);
@@ -52,7 +52,6 @@ Template.simulateSingle.events({
       instance.gamma.set(gamma_parameter);
 
       var susceptible_population = $(".inputSusceptible").val();
-      var infected_population = $(".inputInfected").val();
       instance.susceptible.set(susceptible_population);
 
       var infected_population = $(".inputInfected").val();
@@ -70,7 +69,18 @@ Template.simulateSingle.events({
       var death_rate = $(".inputDeath").val();
       instance.death.set(death_rate);
 
-      
+      instance.render_graph.set(true);
+
+    //   setTimeout(function(){
+    //     // $('#singleSimulationForm').parsley().validate();
+    //
+    //     var validation = $('#singleSimulationForm').parsley().getErrorsMessages();
+    //     alert(validation);
+    // 		if(validation == true){
+    //
+    //     }
+    //
+    // }, 1000);
 
     }
 });
@@ -92,7 +102,6 @@ Template.simulateSingle.onCreated(function() {
 
 Template.simulateSingle.onRendered(function() {
     // Meteor.Loader.loadJs("/js/main.js");
-
 });
 
 Template.simulateSingle.onDestroyed(function() {
