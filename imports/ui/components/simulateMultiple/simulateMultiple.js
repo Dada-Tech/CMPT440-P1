@@ -15,7 +15,7 @@ Template.simulateMultiple.events({
   'click .showInDetail'(event, instance) {
     // event.preventDefault();
     // event.stopPropagation();
-    slidePanel.showPanel('simulateSingle', {});
+    //slidePanel.showPanel('simulateSingle', {});
   }
 });
 

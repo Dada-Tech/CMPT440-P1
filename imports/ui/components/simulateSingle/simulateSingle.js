@@ -100,7 +100,11 @@ Template.simulateSingle.events({
     //
     // }, 1000);
 
-    }
+    },
+  'change .inputHerdImmunity'(event, instance) {
+    //$(".inputRecovered").val(($(".inputSusceptible").val()+$(".inputInfected").val()+$(".inputRecovered").val()) * $(".inputHerdImmunity").val());
+    $(".inputRecovered").val($(".inputSusceptible").val() * $(".inputHerdImmunity").val());
+  }
 });
 
 Template.simulateSingle.onCreated(function() {

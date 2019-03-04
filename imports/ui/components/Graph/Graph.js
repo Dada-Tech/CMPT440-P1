@@ -42,7 +42,13 @@ Template.Graph.onCreated(function() {
   instance.random_id = new ReactiveVar(Math.random().toString(36).slice(2));
 
   if (instance.percent_immune.get() > 0) {
-    instance.recovered_population.set(instance.total_population.get() * instance.percent_immune.get());
+    //instance.recovered_population.set(instance.total_population.get() * instance.percent_immune.get());
+    // should be susceptible * immune%
+    instance.recovered_population.set(instance.susceptible_population.get() * instance.percent_immune.get());
+
+    //also need to update susceptible
+    instance.susceptible_population.set(instance.susceptible_population.get() - instance.recovered_population.get());
+
   }
 
   instance.modelName.set("SIR");
