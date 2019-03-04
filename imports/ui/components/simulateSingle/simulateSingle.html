@@ -27,33 +27,51 @@
 
               <form class="c-card__body" id="singleSimulationForm">
                   <div class="c-field u-mb-small">
-                      <label class="c-field__label" for="input1">Beta</label>
+                      <label style="float: left;" class="c-field__label" for="input1">Beta</label>
+                          <div style="float: left;" class="c-tooltip c-tooltip--right u-ml-small" aria-label="The probability of infection upon contact">
+                              <img src="/img/info-circle-solid.svg" width="15px">
+                          </div>
                       <input class="c-input inputBeta" type="text" id="input1" placeholder="1.0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
                   </div>
 
                   <div class="c-field u-mb-small">
-                      <label class="c-field__label" for="input2">Gamma</label>
-                      <input class="c-input inputGamma" type="text" id="input2" placeholder="0.0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
+                      <label style="float: left;" class="c-field__label" for="input2">Gamma</label>
+                      <div style="float: left;" class="c-tooltip c-tooltip--right u-ml-small" aria-label="How quickly the infected become recovered">
+                          <img src="/img/info-circle-solid.svg" width="15px">
+                      </div>
+                      <input class="c-input inputGamma" type="text" id="input2" placeholder="0.5" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
                   </div>
 
                   <div class="c-field u-mb-small">
-                      <label class="c-field__label" for="input3">Susceptible Population</label>
+                      <label style="float: left;" class="c-field__label" for="input3">Susceptible Population</label>
+                      <div style="float: left;" class="c-tooltip c-tooltip--right u-ml-small" aria-label="The amount of susceptible individuals">
+                          <img src="/img/info-circle-solid.svg" width="15px">
+                      </div>
                       <input class="c-input inputSusceptible" type="text" id="input3" placeholder="1000" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='10' required="">
                   </div>
 
                   <div class="c-field u-mb-small">
-                      <label class="c-field__label" for="input3">Infected Population</label>
-                      <input class="c-input inputInfected" type="text" id="input3" placeholder="200" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='1' required="">
+                      <label style="float: left;" class="c-field__label" for="input3">Infected Population</label>
+                      <div style="float: left;" class="c-tooltip c-tooltip--right u-ml-small" aria-label="The amount of infected individuals">
+                          <img src="/img/info-circle-solid.svg" width="15px">
+                      </div>
+                      <input class="c-input inputInfected" type="text" id="input3" placeholder="1" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='1' required="">
                   </div>
 
                   <div class="c-field u-mb-small">
-                      <label class="c-field__label" for="input3">Recovered Population</label>
-                      <input class="c-input inputRecovered" type="text" id="input3" placeholder="800" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='0' required="">
+                      <label style="float: left;" class="c-field__label" for="input3">Recovered Population</label>
+                      <div style="float: left;" class="c-tooltip c-tooltip--right u-ml-small" aria-label="The amount of recovered indivudals">
+                          <img src="/img/info-circle-solid.svg" width="15px">
+                      </div>
+                      <input class="c-input inputRecovered" type="text" id="input3" placeholder="0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='0' required="">
                   </div>
 
                   <div class="c-field u-mb-small">
-                      <label class="c-field__label" for="input3">Days</label>
-                      <input class="c-input inputDays" type="text" id="input3" placeholder="Days" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='100' required="">
+                      <label style="float: left;" class="c-field__label" for="input3">Days</label>
+                      <div style="float: left;" class="c-tooltip c-tooltip--right u-ml-small" aria-label="How many days to observe the disease">
+                          <img src="/img/info-circle-solid.svg" width="15px">
+                      </div>
+                      <input class="c-input inputDays" type="text" id="input3" placeholder="100" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='100' required="">
                   </div>
 
                   {{#if simulateHerdImmunity}}
@@ -65,13 +83,19 @@
 
                   {{#if simulateDynamicPopulation}}
                     <div class="c-field u-mb-small">
-                        <label class="c-field__label" for="input3">Birth Rate</label>
-                        <input class="c-input inputBirth" type="text" id="input3" placeholder="0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
+                        <label style="float: left;" class="c-field__label" for="input3">Birth Rate</label>
+                        <div style="float: left;" class="c-tooltip c-tooltip--right u-ml-small" aria-label="The rate a population increases due to birth">
+                            <img src="/img/info-circle-solid.svg" width="15px">
+                        </div>
+                        <input class="c-input inputBirth" type="text" id="input3" placeholder="0.0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
                     </div>
 
                     <div class="c-field u-mb-small">
-                        <label class="c-field__label" for="input3">Death Rate</label>
-                        <input class="c-input inputDeath" type="text" id="input3" placeholder="0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
+                        <label style="float: left;" class="c-field__label" for="input3">Death Rate</label>
+                        <div style="float: left;" class="c-tooltip c-tooltip--right u-ml-small" aria-label="The rate a population decreases due to death">
+                            <img src="/img/info-circle-solid.svg" width="15px">
+                        </div>
+                        <input class="c-input inputDeath" type="text" id="input3" placeholder="0.0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
                     </div>
                   {{/if}}
 
