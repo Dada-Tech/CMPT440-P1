@@ -4,6 +4,9 @@ import { Meteor } from 'meteor/meteor'
 Template.universalInputParameters.helpers({
   simulateDynamicPopulation () {
     return appVariableScope.simulateDynamicPopulation.get();
+  },
+  simulateHerdImmunity(){
+    return appVariableScope.simulateHerdImmunity.get();
   }
 
 

@@ -28,8 +28,14 @@ Template.simulateSingle.helpers({
   death_rate () {
     return Template.instance().death.get();
   },
+  percent_immune () {
+    return Template.instance().percent_immune.get();
+  },
   simulateDynamicPopulation () {
     return appVariableScope.simulateDynamicPopulation.get();
+  },
+  simulateHerdImmunity () {
+    return appVariableScope.simulateHerdImmunity.get();
   },
   infected_population(){
     return Template.instance().infected.get();
@@ -65,6 +71,9 @@ Template.simulateSingle.events({
       var days_parameter = $(".inputDays").val();
       instance.days.set(days_parameter);
 
+      var percent_immune = $(".inputHerdImmunity").val();
+      instance.percent_immune.set(percent_immune);
+
       var birth_rate = $(".inputBirth").val();
       instance.birth.set(birth_rate);
 
@@ -72,6 +81,7 @@ Template.simulateSingle.events({
       instance.death.set(death_rate);
 
       instance.render_graph.set(true);
+
 
     //   setTimeout(function(){
     //     // $('#singleSimulationForm').parsley().validate();
@@ -98,12 +108,28 @@ Template.simulateSingle.onCreated(function() {
   instance.days = new ReactiveVar(0);
   instance.birth = new ReactiveVar(0);
   instance.death = new ReactiveVar(0);
+  instance.percent_immune = new ReactiveVar(0);
   instance.render_graph = new ReactiveVar(false);
+
+
 
 });
 
 Template.simulateSingle.onRendered(function() {
     // Meteor.Loader.loadJs("/js/main.js");
+    // this.autorun(() => {
+    //   $(".inputHerdImmunity").asRange({
+    //       step: 0.01,
+    //       range: false,
+    //       min: 0,
+    //       max: 1
+    //   });
+    //
+    //   $(".inputHerdImmunity").on('asRange::change', function (e) {
+    //
+    //   });
+    // });
+
 });
 
 Template.simulateSingle.onDestroyed(function() {

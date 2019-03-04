@@ -164,6 +164,7 @@ Template.Home.onCreated(function() {
 Template.Home.onRendered(function() {
     Meteor.Loader.loadJs("/js/main.js");
     Meteor.Loader.loadJs("/js/parsley.js");
+    Meteor.Loader.loadJs("/js/jquery-asRange.js");
 
 
     var $switch = $('.c-switch');

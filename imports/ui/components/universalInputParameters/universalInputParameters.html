@@ -20,7 +20,12 @@
                     <label class="c-field__label" for="input2">Days</label>
                     <input class="c-input aUniversalInput u-text-center" type="text" placeholder="Days " data-name="universal_days">
                 </div>
-
+                {{#if simulateHerdImmunity}}
+                  <div class="c-field c-field--inline u-mr-small u-flex align-items-center flex-column">
+                      <label class="c-field__label" for="input2">% Immune</label>
+                      <input class="c-input aUniversalInput u-text-center" type="text" placeholder="% Immune " data-name="universal_percent_immune">
+                  </div>
+                {{/if}}
                 {{#if simulateDynamicPopulation}}
                   <div class="c-field c-field--inline u-mr-small u-flex align-items-center flex-column">
                       <label class="c-field__label" for="input2">Birth Rate</label>

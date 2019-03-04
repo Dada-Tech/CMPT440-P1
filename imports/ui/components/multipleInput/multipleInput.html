@@ -23,6 +23,9 @@
                         <th class="c-table__cell c-table__cell--head">Infected Pop.</th>
                         <th class="c-table__cell c-table__cell--head">Recovered Pop.</th>
                         <th class="c-table__cell c-table__cell--head">Susceptible Pop.</th>
+                        {{#if simulateHerdImmunity}}
+                          <th class="c-table__cell c-table__cell--head">% Immunity</th>
+                        {{/if}}
                         {{#if simulateDynamicPopulation}}
                           <th class="c-table__cell c-table__cell--head">Death Rate</th>
                           <th class="c-table__cell c-table__cell--head">Birth Rate</th>
@@ -60,6 +63,11 @@
                           <td class="c-table__cell">
                               <input class="c-input" type="text" id="input1" placeholder="0.0" value="{{days}}" data-rowid="{{random_id}}" data-name="days">
                           </td>
+                          {{#if simulateHerdImmunity}}
+                            <td class="c-table__cell">
+                                <input class="c-input" type="text" id="input1" placeholder="0.0" value="{{percent_immune}}" data-rowid="{{random_id}}" data-name="percent_immune">
+                            </td>
+                          {{/if}}
                           {{#if simulateDynamicPopulation}}
                           <td class="c-table__cell">
                               <input class="c-input" type="text" id="input1" placeholder="0.0" value="{{birth}}" data-rowid="{{random_id}}" data-name="birth">

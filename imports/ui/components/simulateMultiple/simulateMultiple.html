@@ -17,7 +17,7 @@
                       <h4 class="c-graph-card__number">{{days}} Days</h4>
                       <p class="c-graph-card__status">Disease with fast spread e.g Ebola</p>
                   </div>
-                  {{> Graph s=susceptible i=infected r=recovered beta=beta gamma=gamma birth=birth death=death days=days}}
+                  {{> Graph s=susceptible i=infected r=recovered beta=beta gamma=gamma birth=birth death=death days=days immunity=percent_immune}}
               </div>
           </div>
           {{/each}}

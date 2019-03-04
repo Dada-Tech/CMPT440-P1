@@ -37,8 +37,13 @@ Template.Graph.onCreated(function() {
   instance.birth_rate = new ReactiveVar(parseFloat(context_data.birth));
   instance.death_rate = new ReactiveVar(parseFloat(context_data.death));
   instance.days = new ReactiveVar(parseFloat(context_data.days));
+  instance.percent_immune = new ReactiveVar(parseFloat(context_data.immunity));
   instance.modelName = new ReactiveVar("SIRS");
   instance.random_id = new ReactiveVar(Math.random().toString(36).slice(2));
+
+  if (instance.percent_immune.get() > 0) {
+    instance.recovered_population.set(instance.total_population.get() * instance.percent_immune.get());
+  }
 
   instance.modelName.set("SIR");
 

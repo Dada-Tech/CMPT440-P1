@@ -7,6 +7,9 @@ Template.multipleInput.helpers({
   },
   simulateDynamicPopulation () {
     return appVariableScope.simulateDynamicPopulation.get();
+  },
+  simulateHerdImmunity(){
+    return appVariableScope.simulateHerdImmunity.get();
   }
 
 
@@ -24,7 +27,8 @@ Template.multipleInput.events({
         recovered : appVariableScope.universal_recovered.get(),
         days : appVariableScope.universal_days.get(),
         birth : appVariableScope.universal_birth.get(),
-        death : appVariableScope.universal_death.get()
+        death : appVariableScope.universal_death.get(),
+        percent_immune: appVariableScope.universal_percent_immune.get()
       });
       appVariableScope.simulateMultipleInput.set(mulipleInputs);
   },
@@ -69,6 +73,8 @@ Template.multipleInput.onCreated(function() {
   appVariableScope.universal_days = new ReactiveVar(0);
   appVariableScope.universal_birth = new ReactiveVar(0);
   appVariableScope.universal_death = new ReactiveVar(0);
+  appVariableScope.universal_percent_immune = new ReactiveVar(0);
+
   // instance.simulateMultiple = new ReactiveVar(false);
 
 
