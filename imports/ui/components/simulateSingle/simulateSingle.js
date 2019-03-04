@@ -43,6 +43,9 @@ Template.simulateSingle.helpers({
   render_graph(){
     return Template.instance().render_graph.get();
   },
+  loading(){
+    return Template.instance().loading.get();
+  }
 
 });
 
@@ -51,7 +54,7 @@ Template.simulateSingle.events({
       event.preventDefault();
       event.stopPropagation();
 
-      instance.render_graph.set(false);
+      instance.loading.set(true);
 
       var beta_parameter = $(".inputBeta").val();
       instance.beta.set(beta_parameter);
@@ -81,6 +84,9 @@ Template.simulateSingle.events({
       instance.death.set(death_rate);
 
       instance.render_graph.set(true);
+      setTimeout(function(){
+        instance.loading.set(false);
+      }, 5000);
 
 
     //   setTimeout(function(){
@@ -110,7 +116,7 @@ Template.simulateSingle.onCreated(function() {
   instance.death = new ReactiveVar(0);
   instance.percent_immune = new ReactiveVar(0);
   instance.render_graph = new ReactiveVar(false);
-
+  instance.loading = new ReactiveVar(false);
 
 
 });

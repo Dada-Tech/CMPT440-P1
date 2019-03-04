@@ -3,7 +3,19 @@
       <div class="row">
           <div class="col-xl-8">
             {{#if render_graph}}
-              {{> Graph s=susceptible_population i=infected_population r=recovered_population beta=beta_parameter gamma=gamma_parameter birth=birth_rate death=death_rate days=days_parameter immunity=percent_immune}}
+              {{#if loading}}
+              <div class="c-card u-p-medium u-text-center u-mb-medium" data-mh="landing-cards" style="background: transparent !important; border: none !important;">
+
+                  <!-- <img class="u-mb-small u-mt-large" src="/img/medicine_b1ol.svg" alt="Doctor icon" width="200px"> -->
+                  <img class="u-mb-small u-mt-large" src="/img/calc.gif" alt="Doctor icon" width="250px">
+
+                  <h4 class="u-h6 u-mt-medium u-mb-large">
+                       Please be patient while your model is generated
+                  </h4>
+              </div>
+              {{else}}
+                {{> Graph s=susceptible_population i=infected_population r=recovered_population beta=beta_parameter gamma=gamma_parameter birth=birth_rate death=death_rate days=days_parameter immunity=percent_immune}}
+              {{/if}}
             {{else}}
               <div class="c-card u-p-medium u-text-center u-mb-medium" data-mh="landing-cards" style="">
 

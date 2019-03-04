@@ -60,7 +60,7 @@ Template.Graph.onCreated(function() {
 
 Template.Graph.onRendered(function() {
   // alert("Hi");
-
+  var self = this;
   var template_instance = Template.instance();
   console.log(template_instance.days.get());
   // template_instance.susceptible_derivative.get();
@@ -225,7 +225,10 @@ const yValues = xValues.map(function (x) {
     };
 
     var chart_id = "chart-" + template_instance.random_id.get();
-    Plotly.newPlot(chart_id, data, layout);
+
+    self.autorun(function(){
+      Plotly.newPlot(chart_id, data, layout);
+    }.bind(self));
     // Plotly.addTraces(chart_id, {y: [2,1,2]});
 
 }, 1000);
