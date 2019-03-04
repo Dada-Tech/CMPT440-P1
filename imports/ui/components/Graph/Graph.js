@@ -227,7 +227,7 @@ const yValues = xValues.map(function (x) {
     var chart_id = "chart-" + template_instance.random_id.get();
 
     self.autorun(function(){
-      Plotly.newPlot(chart_id, data, layout);
+      Plotly.newPlot(chart_id, data, layout, {displaylogo: false});
     }.bind(self));
     // Plotly.addTraces(chart_id, {y: [2,1,2]});
 
