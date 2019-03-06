@@ -37,7 +37,7 @@
 
               <!-- replace with jquery css selector for class c-input-->
 
-              <form class="c-card__body" id="singleSimulationForm">
+              <form class="c-card__body" id="singleSimulationForm" data-parsley-validate>
                   <div class="c-field u-mb-small">
                       <label style="float: left;" class="c-field__label" for="input1">Beta</label>
                           <div style="float: left;" class="c-tooltip c-tooltip--right u-ml-small" aria-label="The probability of infection upon contact">
@@ -72,13 +72,13 @@
 
                   {{#if simulateHerdImmunity}}
                   <div class="c-field u-mb-small">
-                      <label style="float: left;" class="c-field__label" for="input3">Recovered Population</label>
-                      <div style="float: left;" class="c-tooltip c-tooltip--right u-ml-small" aria-label="The amount of recovered individuals">
+                      <label style="float: left;" class="c-field__label" for="input3">Recovered Population (Automatic)</label>
+                      <div style="float: left;" class="c-tooltip c-tooltip--left u-ml-small" aria-label="The amount of recovered individuals. This value is now controlled by the %immunized to balance the numbers">
                           <img src="/img/info-circle-solid.svg" width="15px">
                       </div>
-                      <input class="c-input inputRecovered" type="text" id="input3dummy" value="0" disabled>
+                      <!--<input class="c-input inputRecovered" type="text" id="input3dummy" value="0" disabled> -->
                       <!-- input3 needs to have a value returned, it wont if disabled. js update must update input3 and input3dummy value-->
-                      <input class="c-input inputRecovered" type="hidden" id="input3" placeholder="0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='0' required="">
+                      <input class="c-input inputRecovered" type="text" id="input3" placeholder="0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='0' value="0" readonly>
                   </div>
                   {{else}}
                   <div class="c-field u-mb-small">
@@ -95,7 +95,7 @@
                       <div style="float: left;" class="c-tooltip c-tooltip--right u-ml-small" aria-label="How many days to observe the disease">
                           <img src="/img/info-circle-solid.svg" width="15px">
                       </div>
-                      <input class="c-input inputDays" type="text" id="input3" placeholder="100" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='100' required="">
+                      <input class="c-input inputDays" type="text" id="input3" placeholder="100" data-parsley-type='number' data-parsley-trigger="change" data-parsley-min='100' data-parsley-required-message="this field is required" required="">
                   </div>
 
                   {{#if simulateHerdImmunity}}
@@ -104,7 +104,7 @@
                         <div style="float: left;" class="c-tooltip c-tooltip--right u-ml-small" aria-label="% of susceptible individuals immunized">
                             <img src="/img/info-circle-solid.svg" width="15px">
                         </div>
-                        <input class="c-input inputHerdImmunity" type="text" id="input3" placeholder="0.4" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
+                        <input class="c-input inputHerdImmunity" type="text" id="input3" placeholder="0.4" value="0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
                     </div>
                   {{/if}}
 
@@ -114,7 +114,7 @@
                         <div style="float: left;" class="c-tooltip c-tooltip--right u-ml-small" aria-label="The rate a population increases due to birth">
                             <img src="/img/info-circle-solid.svg" width="15px">
                         </div>
-                        <input class="c-input inputBirth" type="text" id="input3" placeholder="0.0" data-parsley-type='number' data-parsley-trigger="change" data-parsley-range='[0,1]' required="">
+                        <input class="c-input inputBirth" type="text" id="input3" placeholder="0.0" data-parsley-type='number' data-parsley-trigger="input keyup change" data-parsley-range='[0,1]' required="">
                     </div>
 
                     <div class="c-field u-mb-small">

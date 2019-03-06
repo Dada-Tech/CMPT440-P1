@@ -2,7 +2,6 @@ import { Template } from 'meteor/templating'
 import { Meteor } from 'meteor/meteor'
 
 
-
 Template.simulateSingle.helpers({
   beta_parameter () {
     return Template.instance().beta.get();
@@ -52,6 +51,14 @@ Template.simulateSingle.helpers({
 Template.simulateSingle.events({
     'click .simulate'(event, instance) {
       event.preventDefault();
+	      
+	  //*known issues* herd immunity, dynamic, parsley doesnt validate for some reason. all conditonally excluded values
+	  // if any parsley error exist, do not submit
+      if (document.querySelector('.parsley-error') !== null) {
+        return false;
+      }
+      
+
       event.stopPropagation();
 
       instance.loading.set(true);
@@ -101,10 +108,9 @@ Template.simulateSingle.events({
     // }, 1000);
 
     },
-  'change .inputHerdImmunity'(event, instance) {
-    //$(".inputRecovered").val(($(".inputSusceptible").val()+$(".inputInfected").val()+$(".inputRecovered").val()) * $(".inputHerdImmunity").val());
-    $(".inputRecovered").val($(".inputSusceptible").val() * $(".inputHerdImmunity").val());
-  }
+    'change .inputHerdImmunity'(event, instance) {
+      $(".inputRecovered").val($(".inputSusceptible").val() * $(".inputHerdImmunity").val());
+    }
 });
 
 Template.simulateSingle.onCreated(function() {
@@ -121,8 +127,6 @@ Template.simulateSingle.onCreated(function() {
   instance.percent_immune = new ReactiveVar(0);
   instance.render_graph = new ReactiveVar(false);
   instance.loading = new ReactiveVar(false);
-
-
 });
 
 Template.simulateSingle.onRendered(function() {
